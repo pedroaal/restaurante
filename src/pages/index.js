@@ -1,9 +1,36 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import dbConnect from '../utils/dbConnect'
+import Head from 'next/head';
+import Image from 'next/image';
+import styles from '@/styles/Home.module.css';
+import {useState, useEffect} from 'react';
+import {dbConnect, jsonify } from '@/util/dbConnect';
+import User from '@/models/user';
 
-export default function Home() {
+export async function getServerSideProps(context) {
+  dbConnect();
+  const users = await User.find({}).exec();
+
+  return {
+    props: {
+      users: jsonify(users),
+    }
+  }
+}
+
+export default function Home({users}) {
+  // const [asyncUsers, setAsyncUsers] = useState([]);
+  // const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     fetch('/api/users')
+  //     .then(res => res.json())
+  //     .then(json => {
+  //       setAsyncUsers(json);
+  //       setLoading(false);
+  //     })
+  //   }, 1000);
+  // }, [])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -76,14 +103,4 @@ export default function Home() {
       </footer>
     </div>
   )
-}
-
-export async function getServerSideProps(context) {
-  const { client } = await connectToDatabase()
-
-  const isConnected = await client.isConnected()
-
-  return {
-    props: { isConnected },
-  }
 }
