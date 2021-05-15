@@ -8,7 +8,7 @@ const schema = new Schema(
     clm: {
       type: String,
       required: true,
-    },
+    }
   },
   // created_at, updated_at
   {
@@ -16,4 +16,4 @@ const schema = new Schema(
   }
 );
 
-export default mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema, 'model_plural');
+export default mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema, 'db_collection');

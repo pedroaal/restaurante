@@ -1,21 +1,16 @@
-import mongoose, {Schema} from 'mongoose';
+import mongoose, {Schema, model, models} from 'mongoose';
 
 const MODEL_NAME = 'User';
 
 const schema = new Schema(
   // columnas de la tabla
   {
-    // id: {
-    //   type: ObjectId,
-    //   required: true,
-    // },
     ci: {
       type: String,
       required: true,
-      match: /[/d]/,
+      // match: /[/d]/,
       index: {
         unique: true,
-        sparse: true
       }
     },
     firstName: {
@@ -40,12 +35,12 @@ const schema = new Schema(
     phone: {
       type: String,
       // required: true,
-      max: 7
+      maxlength: 7
     },
     movil: {
       type: String,
       // required: true,
-      max: 10
+      maxlength: 10
     },
     address: {
       type: String,
@@ -64,14 +59,14 @@ const schema = new Schema(
       required: true,
       default: 0,
     },
-    role_id: {
-      type: Schema.ObjectId,
-      required: true,
-    },
-    store_id: {
-      type: Schema.ObjectId,
-      // required: true,
-    },
+    // role_id: {
+    //   type: Schema.ObjectId,
+    //   required: true,
+    // },
+    // store_id: {
+    //   type: Schema.ObjectId,
+    //   // required: true,
+    // },
     status: {
       type: Boolean,
       required: true,
@@ -81,7 +76,7 @@ const schema = new Schema(
   // created_at, updated_at
   {
     timestamps: true,
-  }
+  },
 );
 
-export default mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema, 'users');
+export default models[MODEL_NAME] || model(MODEL_NAME, schema, 'users');
