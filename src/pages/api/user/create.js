@@ -1,14 +1,13 @@
-import dbConnection from '@/util/dbConnect';
+import {dbConnect} from '@/util/dbConnect';
 import User from '@/models/user';
-import {dbConnect, jsonify } from '@/util/dbConnect';
 
 export default async function(req, res) {
   await dbConnect()
-  const {email, password} = req.body;
+  const {firstName, lastName, email, password} = req.body;
   const user = new User({
-    ci: '1719953281',
-    firstName: 'Pedro',
-    lastName: 'Altamirano',
+    // ci: ,
+    firstName: firstName,
+    lastName: lastName,
     email: email,
     password: password,
     // phone: ,
@@ -20,10 +19,14 @@ export default async function(req, res) {
     // role_id: ,
     // store_id: ,
   });
-  console.log(user);
-  const response = await user.save(function (err) {
-    if (err) console.log(err);
-  });
 
-  return res.status(200).json('ok');
+  await user.save((err, result) => {
+    if(err) {
+      console.log(err);
+      return res.status(400).json(err);
+    } else {
+      // console.log(result);
+      return res.status(200).json(result);
+    }
+  });
 }
