@@ -1,15 +1,17 @@
 import {dbConnect} from '@/util/dbConnect';
 import User from '@/models/user';
+import argon2 from "argon2";
 
 export default async function(req, res) {
   await dbConnect()
   const {firstName, lastName, email, password} = req.body;
+  const hash = await argon2.hash(password);
   const user = new User({
     // ci: ,
     firstName: firstName,
     lastName: lastName,
     email: email,
-    password: password,
+    password: hash,
     // phone: ,
     // movil: ,
     // address: ,
