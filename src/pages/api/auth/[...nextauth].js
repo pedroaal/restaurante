@@ -2,7 +2,6 @@ import NextAuth from 'next-auth';
 import Providers from 'next-auth/providers';
 import {dbConnect} from '@/util/dbConnect';
 import argon2 from 'argon2';
-import api from '@/config/api';
 import User from '@/models/user';
 
 const options = {
@@ -11,46 +10,27 @@ const options = {
     Providers.Credentials({
       name: 'Credentials',
       credentials: {
-        firstName: { label: "Nombre", type: "text", placeholder: "Jhon" },
-        lastName: { label: "Apellido", type: "text", placeholder: "Doe" },
         email: { label: "Email", type: "text", placeholder: "user@email.com" },
         password: {  label: "Contaseña", type: "password" },
-        password_confirmation: {  label: "Confirmar contaseña", type: "password" },
       },
       async authorize(credentials) {
-        if(!credentials.firstName){
-          await dbConnect();
-          console.log('cred', credentials);
-          const user = await User.findOne({email: credentials.email}, (err, result) => {
-            if (err){ 
-              console.log(err);
-              return null;
-            }
-          });
-          if(user){
-            console.log(user.password);
-            if(await argon2.verify(user.password, credentials.password)) {
-              return user;
-            } else {
-              return null;
-            }
+        await dbConnect();
+        console.log('cred', credentials);
+        const user = await User.findOne({email: credentials.email}, (err, result) => {
+          if (err){ 
+            console.log(err);
+            return null;
           }
-          return null;
-        } else {
-          credentials.password = await argon2.hash(credentials.password);
-          const url = 'user/create';
-          const user = await api
-            .post(url, credentials)
-            .then(res => {
-              // console.log(res.data);
-              return res.data;
-            })
-            .catch(err => {
-              console.log(err);
-              return null;
-            });
-          return user;
+        });
+        if(user){
+          console.log(user.password);
+          if(await argon2.verify(user.password, credentials.password)) {
+            return user;
+          } else {
+            return null;
+          }
         }
+        return null;
       }
     })
   ],
@@ -68,8 +48,8 @@ const options = {
   //   // },
   // },
   pages: {
-    signIn: '/auth/login',
-    signOut: '/auth/signout',
+    signIn: '/auth/signin',
+    // signOut: '/auth/signout',
     // error: '/auth/error',
     verifyRequest: '/auth/verify-request',
     // newUser: null
