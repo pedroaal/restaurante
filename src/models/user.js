@@ -7,26 +7,29 @@ const schema = new Schema(
   {
     ci: {
       type: String,
-      required: true,
+      // required: false,
       // match: /[/d]/,
       index: {
         unique: true,
+        sparse: true
       }
     },
     firstName: {
       type: String,
       required: true,
+      trim: true,
     },
     lastName: {
       type: String,
       required: true,
+      trim: true,
     },
     email: {
       type: String,
       required: true,
-      index: {
-        unique: true,
-      }
+      trim: true,
+      index: true,
+      unique: true,
     },
     password: {
       type: String,
@@ -35,16 +38,19 @@ const schema = new Schema(
     phone: {
       type: String,
       // required: true,
+      trim: true,
       maxlength: 7
     },
     movil: {
       type: String,
       // required: true,
+      trim: true,
       maxlength: 10
     },
     address: {
       type: String,
       // required: true,
+      trim: true,
     },
     genre: {
       type: Boolean,
