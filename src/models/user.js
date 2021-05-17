@@ -85,4 +85,13 @@ const schema = new Schema(
   },
 );
 
+schema.method('getName',function(){
+  return this.firstName;
+});
+
+schema.method('getCompleteName',function(){
+  return this.firstName + ' ' + this.lastName;
+});
+
+
 export default models[MODEL_NAME] || model(MODEL_NAME, schema, 'users');
