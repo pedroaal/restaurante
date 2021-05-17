@@ -3,12 +3,11 @@ import Image from 'next/image';
 import styles from '@/styles/Home.module.css';
 import {useState, useEffect} from 'react';
 import {dbConnect, jsonify } from '@/util/dbConnect';
-// import User from '@/models/user';
-// import Product from '@/models/product';
 import { signIn, signOut, useSession } from 'next-auth/client';
+import { Button } from '@chakra-ui/button';
 
 export async function getServerSideProps(context) {
-  await dbConnect();
+  // await dbConnect();
   
   // const products = await Product.find({}).exec();
 
@@ -45,18 +44,20 @@ export default function Home({}) {
       </Head>
 
       <main className={styles.main}>
-        {!session && <>
-          Not signed in <br/>
-          <button onClick={() => signIn()}>Sign in</button>
-        </>}
-        {session && <>
-          Signed in as {session.user.email} <br/>
-          <button onClick={() => signOut()}>Sign out</button>
-        </>}        
+        
+        {!session && 
+          <>
+            <Button onClick={() => signIn()}>Iniciar Sesión</Button>
+          </>
+        }
+        {session && 
+          <>
+            Bienvenido {session.user.email} <br/>
+            <Button onClick={() => signOut()}>Cerrar Sesión</Button>
+          </>
+        }        
       </main>
 
-      <footer className={styles.footer}>
-      </footer>
     </div>
   )
 }
