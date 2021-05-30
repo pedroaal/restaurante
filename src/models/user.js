@@ -85,11 +85,11 @@ const schema = new Schema(
   },
 );
 
-schema.method('getName',function(){
+schema.method('getName', function(){
   return this.firstName;
 });
 
-schema.method('getCompleteName',function(){
+schema.method('getCompleteName', function(){
   return this.firstName + ' ' + this.lastName;
 });
 
