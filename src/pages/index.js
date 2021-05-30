@@ -1,10 +1,11 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from '@/styles/Home.module.css';
 import {useState, useEffect} from 'react';
-import {dbConnect, jsonify } from '@/util/dbConnect';
 import { signIn, signOut, useSession } from 'next-auth/client';
-import { Button } from '@chakra-ui/button';
+import { Button, Flex } from '@chakra-ui/react';
+import QR from '@/components/qr';
 
 export async function getServerSideProps(context) {
   // await dbConnect();
@@ -44,7 +45,7 @@ export default function Home({}) {
       </Head>
 
       <main className={styles.main}>
-        
+        <QR />
         {!session && 
           <>
             <Button onClick={() => signIn()}>Iniciar Sesión</Button>
@@ -55,9 +56,11 @@ export default function Home({}) {
             Bienvenido {session.user.email} <br/>
             <Button onClick={() => signOut()}>Cerrar Sesión</Button>
           </>
-        }        
+        }
+        <Link href="/menu">
+          <Button>Menu</Button>
+        </Link>
       </main>
-
     </div>
   )
 }
