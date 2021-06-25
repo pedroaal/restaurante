@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth';
 import Providers from 'next-auth/providers';
-import {dbConnect} from '@/util/dbConnect';
+import {dbConnect} from '@/utils/dbConnect';
 import argon2 from 'argon2';
 import User from '@/models/user';
 

@@ -13,15 +13,15 @@ export default function Categories() {
   const [categories, setCategories] = useState([]);
   
   useEffect(async () => {
-    const categories = await api.get('products/getCategories');
-    console.log(categories);
+    const {data} = await api.get('products/getCategories');
+    setCategories(data);
   }, [])
 
   return (
     <Flex width="100vw" minH='40px' px={6} alignItems='center' border='1px solid orange' justifyContent='space-around'>
-      <h3>Cat 1</h3>
-      <h3>Cat 2</h3>
-      <h3>Cat 3</h3>
+      {categories.map((cat) => (
+        <h3 key={cat._id}>{cat.name}</h3>
+      ))}
     </Flex>
   )
 }

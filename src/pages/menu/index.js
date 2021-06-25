@@ -1,9 +1,11 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import styles from '@/styles/Home.module.css';
 import {useState, useEffect} from 'react';
 import { signIn, signOut, useSession } from 'next-auth/client';
 import { Button, Flex } from '@chakra-ui/react';
+import { Skeleton, SkeletonCircle, SkeletonText, VStack } from "@chakra-ui/react"
+import { SimpleGrid } from "@chakra-ui/react"
+import { Image, Text, Box } from "@chakra-ui/react"
 import Nav from '@/components/header';
 import Footer from '@/components/footer';
 import Categories from '@/components/categories';
@@ -20,22 +22,35 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default function Home({}) {
-  // const [asyncUsers, setAsyncUsers] = useState([]);
-  // const [loading, setLoading] = useState(true);
+export default function Home() {
+  const [ session ] = useSession();
+  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState([]);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     fetch('/api/users')
-  //     .then(res => res.json())
-  //     .then(json => {
-  //       setAsyncUsers(json);
-  //       setLoading(false);
-  //     })
-  //   }, 1000);
-  // }, [])
+  useEffect(() => {
+    setTimeout(() => {
+      fetch('/api/products')
+      .then(res => res.json())
+      .then(json => {
+        setProducts(json);
+        setLoading(false);
+      })
+    }, 1000);
+  }, [])
 
-  const [ session, loading ] = useSession();
+  const skeleton = () => (
+    <Box bg="tomato" height="80px">
+      <Skeleton height="60px" />
+      <Skeleton height="20px" />
+    </Box>
+  );
+
+  const makeProd = (product) => (
+    <Box bg="tomato" height="80px">
+      <Image src="https://bit.ly/sage-adebayo" alt="Segun Adebayo" />
+      <Text>Hola</Text>
+    </Box>
+  );
 
   return (
     <>
@@ -43,11 +58,16 @@ export default function Home({}) {
         <title>Menú</title>
       </Head>
 
-      <Flex height='100vh' width='100vw' direction='column' border="1px solid red">
-        <Nav />
-        <Categories />
+      <VStack p={6} justify-conten='space-between' alignItems='center' w='full'>
+        <VStack>
+          <Nav />
+          <Categories />
+          <SimpleGrid flex='1' columns={2} spacingX="40px" spacingY="20px">
+            {loading ? skeleton : products.map(prod => makeProd(prod)) }
+          </SimpleGrid>
+        </VStack>
         <Footer />
-      </Flex>
+      </VStack>
     </>
   )
 }

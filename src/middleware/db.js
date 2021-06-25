@@ -1,7 +1,7 @@
 import nextConnect from 'next-connect';
-import dbConnect from '@/util/dbConnect';
+import dbConnect from '@/utils/dbConnect';
 
-export default function createHandler(...middlewares) {
+export default async function createHandler(...middlewares) {
   await dbConnect();
   return nextConnect().use(...middlewares);
 }
