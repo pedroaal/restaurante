@@ -11,7 +11,7 @@ const schema = new Schema(
     },
     category_id: {
       type: Schema.ObjectId,
-      // required: true,
+      required: true,
     },
     name: {
       type: String,
@@ -25,8 +25,8 @@ const schema = new Schema(
       type: String,
       required: true,
     },
-    iva_id: {
-      type: Schema.ObjectId,
+    iva: {
+      type: Number,
       required: true,
     },
     price: {

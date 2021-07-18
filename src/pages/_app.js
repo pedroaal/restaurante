@@ -10,6 +10,7 @@ import { ChakraProvider } from "@chakra-ui/react"
 const initialState = {
   'user': {},
   'cart': {},
+  'products_filtered': {},
 }
 
 const composeEnhancers = composeWithDevTools();

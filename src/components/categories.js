@@ -1,4 +1,5 @@
 import {Box, Flex} from '@chakra-ui/layout';
+import { Heading } from "@chakra-ui/react"
 import React, {useState, useEffect} from 'react';
 import api from '@/config/api';
 
@@ -17,10 +18,14 @@ export default function Categories() {
     setCategories(data);
   }, [])
 
+  const filterProducts = (key) => {
+    console.log(key);
+  }
+
   return (
     <Flex width="100vw" minH='40px' px={6} alignItems='center' border='1px solid orange' justifyContent='space-around'>
       {categories.map((cat) => (
-        <h3 key={cat._id}>{cat.name}</h3>
+        <Heading as="h4" key={cat._id} onClick={() => filterProducts(cat._id)}>{cat.name}</Heading>
       ))}
     </Flex>
   )

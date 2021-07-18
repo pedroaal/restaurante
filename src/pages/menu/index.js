@@ -1,14 +1,18 @@
 import Head from 'next/head';
-import styles from '@/styles/Home.module.css';
 import {useState, useEffect} from 'react';
-import { signIn, signOut, useSession } from 'next-auth/client';
-import { Button, Flex } from '@chakra-ui/react';
-import { Skeleton, SkeletonCircle, SkeletonText, VStack } from "@chakra-ui/react"
+import { useSession } from 'next-auth/client';
+import { Button, Flex, Spacer } from '@chakra-ui/react';
+import { Skeleton, SkeletonText, VStack } from "@chakra-ui/react"
 import { SimpleGrid } from "@chakra-ui/react"
 import { Image, Text, Box } from "@chakra-ui/react"
 import Nav from '@/components/header';
-import Footer from '@/components/footer';
 import Categories from '@/components/categories';
+import { connect } from 'react-redux';
+import { setProducts } from '@/actions';
+
+const myLoader = (src) => {
+  return `http://127.0.0.1:3000/${src}`
+}
 
 export async function getServerSideProps(context) {
   // await dbConnect();
@@ -22,21 +26,23 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default function Home() {
+const Home = ({products}) => {
   const [ session ] = useSession();
   const [loading, setLoading] = useState(true);
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState();
 
-  useEffect(() => {
-    setTimeout(() => {
-      fetch('/api/products')
+  const saveProducts = () => {
+    fetch('/api/products')
       .then(res => res.json())
       .then(json => {
-        setProducts(json);
+        props.setProducts(json);
         setLoading(false);
       })
-    }, 1000);
-  }, [])
+  }
+
+  if(products.isEmpty()){
+    saveProducts()
+  }
 
   const skeleton = () => (
     <Box bg="tomato" height="80px">
@@ -46,9 +52,16 @@ export default function Home() {
   );
 
   const makeProd = (product) => (
-    <Box bg="tomato" height="80px">
-      <Image src="https://bit.ly/sage-adebayo" alt="Segun Adebayo" />
-      <Text>Hola</Text>
+    <Box p={4} height="80px">
+      <Image
+        src={myLoader(product.img)}
+        alt={product.name}
+      />
+      <Flex>
+        <Text>{product.name}</Text>
+        <Spacer />
+        <Text>{product.price}</Text>
+      </Flex>
     </Box>
   );
 
@@ -58,16 +71,26 @@ export default function Home() {
         <title>Menú</title>
       </Head>
 
-      <VStack p={6} justify-conten='space-between' alignItems='center' w='full'>
-        <VStack>
+      <VStack justify-conten='space-between' alignItems='center' w='full'>
           <Nav />
           <Categories />
           <SimpleGrid flex='1' columns={2} spacingX="40px" spacingY="20px">
             {loading ? skeleton : products.map(prod => makeProd(prod)) }
           </SimpleGrid>
-        </VStack>
-        <Footer />
+        {/* <Footer /> */}
       </VStack>
     </>
   )
 }
+
+const mapStateToProps = state => {
+  return {
+    products: state.products_filtered
+  }
+}
+
+const mapDispatchToProps = {
+  setProducts,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
