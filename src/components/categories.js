@@ -1,5 +1,3 @@
-import {Box, Flex} from '@chakra-ui/layout';
-import { Heading } from "@chakra-ui/react"
 import React, {useState, useEffect} from 'react';
 import api from '@/config/api';
 
@@ -23,10 +21,10 @@ export default function Categories() {
   }
 
   return (
-    <Flex width="100vw" minH='40px' px={6} alignItems='center' border='1px solid orange' justifyContent='space-around'>
+    <div className='flex flex-nowrap w-full border-1 overflow-x-auto'>
       {categories.map((cat) => (
-        <Heading as="h4" key={cat._id} onClick={() => filterProducts(cat._id)}>{cat.name}</Heading>
+        <button className="btn-sm bg-gray-50" key={cat._id} onClick={() => filterProducts(cat._id)}>{cat.name}</button>
       ))}
-    </Flex>
+    </div>
   )
 }

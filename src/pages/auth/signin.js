@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import styles from '@/styles/Home.module.css';
 import {useState, useEffect} from 'react';
 import {signIn, getCsrfToken} from 'next-auth/client';
 import {Button, Flex, Heading, Input} from '@chakra-ui/react';

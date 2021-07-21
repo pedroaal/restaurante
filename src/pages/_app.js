@@ -5,29 +5,26 @@ import { createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import reducers from '@/reducers';
 import '@/styles/globals.css';
-import { ChakraProvider } from "@chakra-ui/react"
+// import 'tailwindcss/tailwind.css';
 
-const initialState = {
-  'user': {},
-  'cart': {},
-  'products_filtered': {},
-}
+// const initialState = {
+//   'cart': {},
+//   'products_filtered': {},
+// }
 
 const composeEnhancers = composeWithDevTools();
 
 const store = createStore(
   reducers,
-  initialState,
-  composeEnhancers,
+  // initialState,
+  // composeEnhancers,
 )
 
 function MyApp({ Component, pageProps }) {
   return (
     <Provider session={pageProps.session}>
       <ReduxProvider store={store}>
-        <ChakraProvider>
-          <Component {...pageProps} />
-        </ChakraProvider>
+        <Component {...pageProps} />
       </ReduxProvider>
     </Provider>
   )

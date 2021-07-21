@@ -7,7 +7,7 @@ export default async function(req, res) {
   
   switch (method) {
     case 'GET':
-      const products = await Product.find().exec();
+      const products = await Product.find().limit(20); //.exec()
       // console.log(categories);
       res.status(200).json(products)
       break

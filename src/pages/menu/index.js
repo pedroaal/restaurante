@@ -1,10 +1,6 @@
 import Head from 'next/head';
 import {useState, useEffect} from 'react';
 import { useSession } from 'next-auth/client';
-import { Button, Flex, Spacer } from '@chakra-ui/react';
-import { Skeleton, SkeletonText, VStack } from "@chakra-ui/react"
-import { SimpleGrid } from "@chakra-ui/react"
-import { Image, Text, Box } from "@chakra-ui/react"
 import Nav from '@/components/header';
 import Categories from '@/components/categories';
 import { connect } from 'react-redux';
@@ -26,43 +22,39 @@ export async function getServerSideProps(context) {
   }
 }
 
-const Home = ({products}) => {
+const Home = () => {
   const [ session ] = useSession();
   const [loading, setLoading] = useState(true);
-  // const [products, setProducts] = useState();
+  const [products, setProducts] = useState();
 
   const saveProducts = () => {
     fetch('/api/products')
       .then(res => res.json())
       .then(json => {
-        props.setProducts(json);
+        setProducts(json);
         setLoading(false);
       })
   }
 
-  if(products.isEmpty()){
+  // console.log(products);
+  // if(products.length <= 0){
     saveProducts()
-  }
+  // }
 
   const skeleton = () => (
-    <Box bg="tomato" height="80px">
-      <Skeleton height="60px" />
-      <Skeleton height="20px" />
-    </Box>
+    <div></div>
   );
 
   const makeProd = (product) => (
-    <Box p={4} height="80px">
-      <Image
-        src={myLoader(product.img)}
-        alt={product.name}
-      />
-      <Flex>
-        <Text>{product.name}</Text>
-        <Spacer />
-        <Text>{product.price}</Text>
-      </Flex>
-    </Box>
+    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+      <img class="w-full" src={myLoader('helado.jpeg')} alt={product.name} />
+      <div class="px-6 py-4">
+        <div class="font-bold text-xl mb-2">{product.name}</div>
+        <p class="text-gray-700 text-base">
+          $ {product.price}
+        </p>
+      </div>
+    </div>
   );
 
   return (
@@ -71,14 +63,14 @@ const Home = ({products}) => {
         <title>Menú</title>
       </Head>
 
-      <VStack justify-conten='space-between' alignItems='center' w='full'>
+      <div className='flex flex-col'>
           <Nav />
           <Categories />
-          <SimpleGrid flex='1' columns={2} spacingX="40px" spacingY="20px">
+          <div className='grid grid-cols-2 gap-2 p-2'>
             {loading ? skeleton : products.map(prod => makeProd(prod)) }
-          </SimpleGrid>
+          </div>
         {/* <Footer /> */}
-      </VStack>
+      </div>
     </>
   )
 }

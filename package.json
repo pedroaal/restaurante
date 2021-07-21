@@ -10,17 +10,25 @@
   "dependencies": {
     "@chakra-ui/icons": "^1.0.13",
     "@chakra-ui/react": "^1.6.1",
+    "@craco/craco": "^6.2.0",
     "argon2": "^0.27.2",
     "axios": "^0.21.1",
+    "cssnano": "^4.1.11",
     "mongoose": "^5.12.9",
     "next": "10.2.0",
     "next-auth": "^3.22.0",
     "next-connect": "^0.10.1",
+    "postcss-easy-import": "^3.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.2.0",
     "react-redux": "^7.2.4",
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.3.1",
+    "postcss": "^8.3.5",
+    "tailwindcss": "^2.2.4"
   }
 }

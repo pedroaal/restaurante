@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import styles from '@/styles/Home.module.css';
 import {useState, useEffect} from 'react';
 import {signIn, signOut, useSession, getCsrfToken} from 'next-auth/client';
 import {Button, Flex, Heading, Input, useToast} from '@chakra-ui/react';

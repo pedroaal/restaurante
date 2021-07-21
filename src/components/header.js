@@ -1,5 +1,3 @@
-import { HamburgerIcon, SearchIcon } from '@chakra-ui/icons';
-import {Box, Flex} from '@chakra-ui/layout';
 import React, {useState, useEffect} from 'react';
 
 export async function getServerSideProps(context) {
@@ -11,10 +9,20 @@ export async function getServerSideProps(context) {
 
 export default function Nav() {
   return (
-    <Flex width="100vw" minH='60px' alignItems='center' px={6} border='1px solid green' justifyContent='space-between'>
-      <SearchIcon></SearchIcon>
-      <h1>Restaurante</h1>
-      <HamburgerIcon></HamburgerIcon>
-    </Flex>
+    <div className='flex justify-center bg-gray-300 w-full p-4'>
+      <div className='flex-none'>
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
+      <div className='flex-grow'>
+        <h1 className='text-center'>Restaurante</h1>
+      </div>
+      <div className='flex-none'>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </div>
+    </div>
   )
 }
