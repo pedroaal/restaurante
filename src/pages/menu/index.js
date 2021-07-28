@@ -2,6 +2,7 @@ import Head from 'next/head';
 import {useState, useEffect} from 'react';
 import { useSession } from 'next-auth/client';
 import Nav from '@/components/header';
+import Footer from '@/components/footer';
 import Categories from '@/components/categories';
 import { connect } from 'react-redux';
 import { setProducts } from '@/actions';
@@ -75,7 +76,7 @@ const Home = () => {
           <div className='grid grid-cols-2 md:grid-cols-4 gap-2 p-2'>
             {loading ? [1,2,3,4].map(i => {return skeleton(i)}) : products.map(prod => makeProd(prod)) }
           </div>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </>
   )
