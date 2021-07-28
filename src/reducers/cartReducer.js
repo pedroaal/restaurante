@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   cart: {}
 }
 
-export default (state = INITIAL_STATE, action) => {
+const cart = (state = INITIAL_STATE, action) => {
   switch(action.type) {
     case 'GET_CART':
       return { ...state, cart: action.payload };
@@ -14,3 +14,5 @@ export default (state = INITIAL_STATE, action) => {
       break;
   }
 }
+
+export default cart;

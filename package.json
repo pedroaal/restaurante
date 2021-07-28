@@ -1,5 +1,5 @@
 {
-  "name": "restaurnate",
+  "name": "restaurante",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,9 +8,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@chakra-ui/icons": "^1.0.13",
-    "@chakra-ui/react": "^1.6.1",
-    "@craco/craco": "^6.2.0",
     "argon2": "^0.27.2",
     "axios": "^0.21.1",
     "cssnano": "^4.1.11",

@@ -12,26 +12,36 @@ export async function getServerSideProps(context) {
 
 export default function Signin({csrfToken}) {
   return (
-    <div className={styles.container}>
+    <div className='screen-centered'>
       <Head>
         <title>Sign In</title>
       </Head>
 
-      <main className={styles.main}>
-        <Flex height='100vh' alignItems='center' justifyContent='center'>
-          <Flex direction='column' background='gray.100' p={5} rounded={6}>
-            <Heading mb={6}>Iniciar Sesión</Heading>
-            <form method='post' action='/api/auth/callback/credentials'>
-              <Input type='hidden' name='csrfToken' defaultValue={csrfToken}/>
-              <Input type='email' name='email' placeholder='Email' variant='filled' mb={3} />
-              <Input type='password' name='password' placeholder='Contraseña' variant='filled' mb={3} />
-              <Button type="submit" colorScheme='teal'>Iniciar Sesión</Button>
-            </form>   
-          </Flex>
-        </Flex>
+      <main className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col'>
+        <h1 className='mb-2'>Iniciar Sesión</h1>
+        <form method='post' action='/api/auth/callback/credentials'>
+          <input type="hidden" name='csrfToken' value={csrfToken} />
+          <div className="my-2">
+            <label className="form-label" for="email">Email</label>
+            <input className="form-input" id="email" name="email" type="text" />
+          </div>
+          <div className="my-2">
+            <label className="form-label" for="password">Contraseña</label>
+            <input className="form-input" id="password" name="password" type="password" />
+            <p className="text-red text-xs italic">Please choose a password.</p>
+          </div>
+          <div className="flex items-center justify-between">
+            <button className="btn bg-black text-white w-full mx-0" type="submit">
+              Iniciar Sesión
+            </button>
+            {/* <a className="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker" href="#">
+              Forgot Password?
+            </a> */}
+          </div>
+        </form>
       </main>
 
-      <footer className={styles.footer}>
+      <footer className=''>
       </footer>
     </div>
   )
