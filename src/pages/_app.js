@@ -5,7 +5,6 @@ import { createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import reducers from '@/reducers';
 import '@/styles/globals.css';
-// import 'tailwindcss/tailwind.css';
 
 // const initialState = {
 //   'cart': {},
