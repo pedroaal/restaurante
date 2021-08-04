@@ -1,9 +1,10 @@
 import Head from 'next/head';
 import {useState, useEffect} from 'react';
 import { useSession } from 'next-auth/client';
-import Nav from '@/components/header';
-import Footer from '@/components/footer';
-import Categories from '@/components/categories';
+import Nav from '@/organisms/header';
+import Footer from '@/organisms/footer';
+import Categories from '@/organisms/categories';
+import Sidebar from '@/organisms/sidebar';
 import { connect } from 'react-redux';
 import { setProducts } from '@/actions';
 
@@ -70,13 +71,20 @@ const Home = () => {
         <title>Menú</title>
       </Head>
 
-      <div className='flex flex-col'>
-          <Nav />
-          <Categories />
-          <div className='grid grid-cols-2 md:grid-cols-4 gap-2 p-2'>
-            {loading ? [1,2,3,4].map(i => {return skeleton(i)}) : products.map(prod => makeProd(prod)) }
+      <div className='flex flex-row'>
+        <div className='flex flex-col h-screen sm:w-full md:w-5/6'>
+          <div>
+            <Nav />
+            <Categories />
           </div>
-        <Footer />
+          <div className="flex-1 overflow-y-auto">
+            <div className='grid grid-cols-2 md:grid-cols-4 gap-2 p-2'>
+              {loading ? [1,2,3,4].map(i => {return skeleton(i)}) : products.map(prod => makeProd(prod)) }
+            </div>
+          </div>
+          <Footer />
+        </div>
+        <Sidebar />
       </div>
     </>
   )
