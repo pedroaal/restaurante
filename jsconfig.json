@@ -3,7 +3,10 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"],
-      "@/api/*": ["pages/api/*"]
+      "@/api/*": ["pages/api/*"],
+      "@/atoms/*": ["components/atoms/*"],
+      "@/molecules/*": ["components/molecules/*"],
+      "@/organisms/*": ["components/organisms/*"],
     }
   }
 }
