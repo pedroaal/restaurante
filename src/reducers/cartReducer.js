@@ -1,12 +1,16 @@
 const INITIAL_STATE = {
   store_id: 0,
   table_id: 0,
-  cart: {}
+  cart: []
 }
 
-const cart = (state = INITIAL_STATE, action) => {
+const cartReducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
     case 'GET_CART':
+      return { ...state, cart: action.payload };
+      break;
+    case 'ADD_CART':
+      console.log(action)
       return { ...state, cart: action.payload };
       break;
     default:
@@ -15,4 +19,4 @@ const cart = (state = INITIAL_STATE, action) => {
   }
 }
 
-export default cart;
+export default cartReducer;

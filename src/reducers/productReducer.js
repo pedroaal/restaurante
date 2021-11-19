@@ -3,7 +3,7 @@ const INITIAL_STATE = {
   products_filtered: [],
 }
 
-const product = (state = INITIAL_STATE, action) => {
+const productReducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
     case 'SET_PRODUCTS':
       return { ...state, products_all: action.payload };
@@ -20,4 +20,4 @@ const product = (state = INITIAL_STATE, action) => {
   }
 }
 
-export default product;
+export default productReducer;

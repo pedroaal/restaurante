@@ -1,8 +1,10 @@
 import React from 'react';
 import { Provider } from 'next-auth/client';
-import { Provider as ReduxProvider } from 'react-redux';
+
 import { createStore } from 'redux';
+import { Provider as ReduxProvider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+
 import reducers from '@/reducers';
 import '@/styles/globals.css';
 

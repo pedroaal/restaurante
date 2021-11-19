@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import api from '@/config/api';
+import { baseAPI } from '@/config/api';
 
 export async function getServerSideProps(context) {
   return {
@@ -13,13 +13,18 @@ export default function Categories() {
   const [categories, setCategories] = useState([]);
   
   useEffect(async () => {
-    const {data} = await api.get('products/getCategories');
-    setCategories(data);
-    setLoading(false);
+    fetch(`${baseAPI}products/getCategories`)
+    .then(res => res.json())
+    .then(categories => {
+      setCategories(categories);
+      setLoading(false);
+    });
   }, [])
 
   const skeleton = () => (
-    <button className="btn-sm bg-gray-300 animate-pulse h-8 w-1/3"></button>
+    [1,2,3].map(i => (
+      <button className="btn-sm bg-gray-300 animate-pulse h-8 w-1/3" key={i}></button>
+    ))
   );
 
   const filterProducts = (key) => {
@@ -28,7 +33,7 @@ export default function Categories() {
 
   return (
     <div className='flex flex-nowrap w-full p-1 overflow-x-auto'>
-      {loading ? [1,2,3].map(i => {return skeleton(i)}) : categories.map((cat) => (
+      {loading ? skeleton() : categories.map((cat) => (
         <button className="btn-sm bg-gray-200" key={cat._id} onClick={() => filterProducts(cat._id)}>{cat.name}</button>
       ))}
     </div>

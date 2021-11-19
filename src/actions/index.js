@@ -1,3 +1,11 @@
+import {
+  GET_CART,
+  ADD_CART,
+  SET_PRODUCTS,
+  GET_PRODUCTS,
+  FILTER_PRODUCTS,
+} from '@/actions/types'
+
 export const getCart = payload => ({
   type: 'GET_CART',
   payload

@@ -4,6 +4,8 @@
     "paths": {
       "@/*": ["*"],
       "@/api/*": ["pages/api/*"],
+      "@/actions/*": ["actions/*"],
+      "@/reducers/*": ["reducers/*"],
       "@/atoms/*": ["components/atoms/*"],
       "@/molecules/*": ["components/molecules/*"],
       "@/organisms/*": ["components/organisms/*"],

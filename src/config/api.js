@@ -1,13 +1,5 @@
-import axios from 'axios';
+// const baseURL = 'http://localhost:3000/'
+const baseURL = 'http://127.0.0.1:3000/'
+const baseAPI = `${baseURL}api/`
 
-const api = axios.create({
-  baseURL: 'http://localhost:3000/api/',
-  headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Content-type': 'application/json',
-  },
-});
-
-// api.defaults.headers.common['Authorization'] = 'AUTH TOKEN FROM INSTANCE';
-
-export default api;
+export {baseURL, baseAPI}

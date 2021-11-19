@@ -1,22 +1,24 @@
 import Head from 'next/head';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import { useSession } from 'next-auth/client';
+import {baseURL, baseAPI} from 'config/api'
+
+import {
+  ADD_CART
+} from '@/actions'
+import reducers from '@/reducers';
+import { connect } from 'react-redux';
+
 import Nav from '@/organisms/header';
 import Footer from '@/organisms/footer';
 import Categories from '@/organisms/categories';
 import Sidebar from '@/organisms/sidebar';
-import { connect } from 'react-redux';
-import { setProducts } from '@/actions';
 
-const myLoader = (src) => {
-  return `http://127.0.0.1:3000/${src}`
-}
+// import Producto from '@/molecules/product'
+import Skeleton from '@/molecules/skeleton';
+import Producto from '@/components/molecules/product';
 
 export async function getServerSideProps(context) {
-  // await dbConnect();
-  
-  // const products = await Product.find({}).exec();
-
   return {
     props: {
       // products: jsonify(products),
@@ -27,10 +29,10 @@ export async function getServerSideProps(context) {
 const Home = () => {
   const [session] = useSession();
   const [loading, setLoading] = useState(true);
-  const [products, setProducts] = useState();
+  const [products, setProducts] = useState([]);
 
   const saveProducts = () => {
-    fetch('/api/products')
+    fetch(`${baseAPI}products`)
       .then(res => res.json())
       .then(json => {
         setProducts(json);
@@ -38,31 +40,16 @@ const Home = () => {
       })
   }
 
-  // console.log(products);
-  // if(products.length <= 0){
+  if(products.length <= 0){
     saveProducts()
-  // }
+  }
 
   const skeleton = (n) => (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg" key={n}>
-      <div className="bg-gray-400 lg:h-48 md:h-36 h-24 w-full object-cover object-center"></div>
-      <div className="px-6 py-4">
-        <h2 className="bg-gray-400 animate-pulse h-4 w-100 mb-2"></h2>
-        <h1 className="bg-gray-500 animate-pulse h-3 w-1/2"></h1>
-      </div>
-    </div>
+    <Skeleton key={n} />
   );
 
-  const makeProd = (product) => (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg" key={product._id}>
-      <img className="w-full" src={myLoader('helado.jpeg')} alt={product.name} />
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{product.name}</div>
-        <p className="text-gray-700 text-base">
-          $ {product.price}
-        </p>
-      </div>
-    </div>
+  const makeProd = (producto) => (
+    <Producto producto={producto} key={producto._id} />
   );
 
   return (
@@ -79,7 +66,7 @@ const Home = () => {
           </div>
           <div className="flex-1 overflow-y-auto">
             <div className='grid grid-cols-2 md:grid-cols-4 gap-2 p-2'>
-              {loading ? [1,2,3,4].map(i => {return skeleton(i)}) : products.map(prod => makeProd(prod)) }
+              {loading ? [1,2,3,4].map(i => skeleton(i)) : products.map(prod => makeProd(prod)) }
             </div>
           </div>
           <Footer />
@@ -90,14 +77,13 @@ const Home = () => {
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    products: state.products_filtered
-  }
-}
+// const mapStateToProps = reducers => {
+//   return reducers.productReducer;
+// }
 
-const mapDispatchToProps = {
-  setProducts,
-}
+// const mapDispatchToProps = {
+//   setProducts,
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+// export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;
