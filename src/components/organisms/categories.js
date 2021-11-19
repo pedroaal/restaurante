@@ -29,8 +29,10 @@ function Categories({products, filtered, setFiltered}) {
     ))
   );
 
-  const filterProducts = (key) => {
+  const filterProducts = key => {
     console.log(key);
+    console.log(products.filter(prod => prod.category_id == key))
+    setFiltered(products.filter(prod => prod.category_id == key))
   }
 
   return (

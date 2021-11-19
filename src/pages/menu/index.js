@@ -41,7 +41,7 @@ function Home({products, setProducts, filtered, setFiltered}) {
       })
   }
 
-  if(filtered.length <= 0){
+  if(products.length <= 0){
     saveProducts()
   }
 
@@ -67,7 +67,7 @@ function Home({products, setProducts, filtered, setFiltered}) {
           </div>
           <div className="flex-1 overflow-y-auto">
             <div className='grid grid-cols-2 md:grid-cols-4 gap-2 p-2'>
-              {loading ? [1,2,3,4].map(i => skeleton(i)) : filtered.map(prod => makeProd(prod)) }
+              {loading ? [1,2,3,4].map(i => skeleton(i)) : filtered.length > 0 ?  filtered.map(prod => makeProd(prod)) : 'Sin datos' }
             </div>
           </div>
           <Footer />
