@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/client';
 import {baseURL, baseAPI} from 'config/api'
 
 import {
-  ADD_CART
+  SET_PRODUCTS,
 } from '@/actions'
 import reducers from '@/reducers';
 import { connect } from 'react-redux';
@@ -77,13 +77,13 @@ const Home = () => {
   )
 }
 
-// const mapStateToProps = reducers => {
-//   return reducers.productReducer;
-// }
+const mapStateToProps = reducers => {
+  return reducers.productReducer;
+}
 
-// const mapDispatchToProps = {
-//   setProducts,
-// }
+const mapDispatchToProps = {
+  SET_PRODUCTS,
+}
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Home);
-export default Home;
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
+// export default Home;
