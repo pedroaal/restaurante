@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "argon2": "^0.27.2",
-    "axios": "^0.21.1",
     "cssnano": "^4.1.11",
     "mongoose": "^5.12.9",
     "next": "10.2.0",
