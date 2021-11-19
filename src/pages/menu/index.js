@@ -1,12 +1,12 @@
 import Head from 'next/head';
-import {useState} from 'react';
+import { useState } from 'react';
 import { useSession } from 'next-auth/client';
-import {baseURL, baseAPI} from 'config/api'
+import { baseURL, baseAPI } from 'config/api'
 
 import {
-  SET_PRODUCTS,
-} from '@/actions'
-import reducers from '@/reducers';
+  setProducts,
+  setFiltered,
+} from '@/redux/actions'
 import { connect } from 'react-redux';
 
 import Nav from '@/organisms/header';
@@ -26,21 +26,22 @@ export async function getServerSideProps(context) {
   }
 }
 
-const Home = () => {
+function Home({products, setProducts, filtered, setFiltered}) {
   const [session] = useSession();
   const [loading, setLoading] = useState(true);
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
 
   const saveProducts = () => {
     fetch(`${baseAPI}products`)
       .then(res => res.json())
       .then(json => {
         setProducts(json);
+        setFiltered(json);
         setLoading(false);
       })
   }
 
-  if(products.length <= 0){
+  if(filtered.length <= 0){
     saveProducts()
   }
 
@@ -66,7 +67,7 @@ const Home = () => {
           </div>
           <div className="flex-1 overflow-y-auto">
             <div className='grid grid-cols-2 md:grid-cols-4 gap-2 p-2'>
-              {loading ? [1,2,3,4].map(i => skeleton(i)) : products.map(prod => makeProd(prod)) }
+              {loading ? [1,2,3,4].map(i => skeleton(i)) : filtered.map(prod => makeProd(prod)) }
             </div>
           </div>
           <Footer />
@@ -77,13 +78,15 @@ const Home = () => {
   )
 }
 
-const mapStateToProps = reducers => {
-  return reducers.productReducer;
-}
+const mapStateToProps = state => ({
+  // all: state,
+  products: state.productReducer.products_all,
+  filtered: state.productReducer.products_filtered,
+})
 
 const mapDispatchToProps = {
-  SET_PRODUCTS,
+  setProducts: setProducts,
+  setFiltered:setFiltered,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
-// export default Home;

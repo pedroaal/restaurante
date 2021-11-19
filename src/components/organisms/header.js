@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from '@/organisms/sidebar';
 
 export async function getServerSideProps(context) {

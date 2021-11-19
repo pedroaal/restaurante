@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import {useState, useEffect} from 'react';
-import {signIn, signOut, useSession, getCsrfToken} from 'next-auth/client';
+import { useState, useEffect } from 'react';
+import { signIn, signOut, useSession, getCsrfToken } from 'next-auth/client';
 import api from '@/config/api';
 
 export async function getServerSideProps(context) {

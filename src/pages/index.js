@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/client';
 import QR from '@/molecules/qr';
 

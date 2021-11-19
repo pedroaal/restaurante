@@ -1,4 +1,4 @@
-import {dbConnect} from '@/utils/dbConnect';
+import { dbConnect } from '@/utils/dbConnect';
 import User from '@/models/user';
 import argon2 from "argon2";
 

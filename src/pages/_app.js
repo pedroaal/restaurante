@@ -1,25 +1,10 @@
 import React from 'react';
 import { Provider } from 'next-auth/client';
 
-import { createStore } from 'redux';
 import { Provider as ReduxProvider } from 'react-redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import store from '@/redux/store'
 
-import reducers from '@/reducers';
 import '@/styles/globals.css';
-
-// const initialState = {
-//   'cart': {},
-//   'products_filtered': {},
-// }
-
-const composeEnhancers = composeWithDevTools();
-
-const store = createStore(
-  reducers,
-  // initialState,
-  // composeEnhancers,
-)
 
 function MyApp({ Component, pageProps }) {
   return (

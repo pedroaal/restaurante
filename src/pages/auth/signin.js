@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import {useState, useEffect} from 'react';
-import {signIn, getCsrfToken} from 'next-auth/client';
+import { useState, useEffect } from 'react'; 
+import { signIn, getCsrfToken } from 'next-auth/client'; 
 
 export async function getServerSideProps(context) {
   const csrfToken = await getCsrfToken(context)

@@ -5,17 +5,17 @@ export const getCart = payload => ({
   payload
 });
 
-export const setProducts = payload => ({
-  type: types.SET_PRODUCTS,
-  payload
-});
-
 export const getProducts = payload => ({
   type: types.GET_PRODUCTS,
   payload
 });
 
-export const filterProducts = payload => ({
+export const setProducts = payload => ({
+  type: types.SET_PRODUCTS,
+  payload
+});
+
+export const setFiltered = payload => ({
   type: types.FILTER_PRODUCTS,
   payload
 });

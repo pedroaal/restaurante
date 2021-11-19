@@ -1,5 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { baseAPI } from '@/config/api';
+import { connect } from 'react-redux';
+import { setFiltered } from '@/redux/actions'
 
 export async function getServerSideProps(context) {
   return {
@@ -8,7 +10,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default function Categories() {
+function Categories({products, filtered, setFiltered}) {
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   
@@ -39,3 +41,15 @@ export default function Categories() {
     </div>
   )
 }
+
+const mapStateToProps = state => ({
+  // all: state,
+  products: state.productReducer.products_all,
+  filtered: state.productReducer.products_filtered,
+})
+
+const mapDispatchToProps = {
+  setFiltered: setFiltered,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);
