@@ -1,3 +1,5 @@
+import * as types from '@/redux/types'
+
 const INITIAL_STATE = {
   products_all: [],
   products_filtered: [],
@@ -5,17 +7,17 @@ const INITIAL_STATE = {
 
 const productReducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
-    case 'SET_PRODUCTS':
+    case types.SET_PRODUCTS:
       return { ...state, products_all: action.payload };
       break;
-    case 'GET_PRODUCTS':
+    case types.GET_PRODUCTS:
       return { ...state, products_all: action.payload };
       break;
-    case 'FILTER_PRODUCTS':
+    case types.FILTER_PRODUCTS:
       return { ...state, products_filtered: action.payload };
       break;
     default:
-      return { state };
+      return state;
       break;
   }
 }
