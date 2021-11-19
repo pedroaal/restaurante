@@ -5,6 +5,11 @@ export const getCart = payload => ({
   payload
 });
 
+export const addCart = payload => ({
+  type: types.ADD_CART,
+  payload
+});
+
 export const getProducts = payload => ({
   type: types.GET_PRODUCTS,
   payload
