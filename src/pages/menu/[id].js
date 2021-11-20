@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router'
-import Head from 'next/head';
 import { baseURL, baseAPI } from 'config/api';
 
 import {
@@ -9,9 +8,7 @@ import {
 } from '@/redux/actions'
 import { connect } from 'react-redux';
 
-import Nav from '@/organisms/header';
-import Footer from '@/organisms/footer';
-import Sidebar from '@/organisms/sidebar';
+import Layout from '@/components/layout';
 
 export async function getServerSideProps(context) {
   return {
@@ -53,26 +50,9 @@ function ProductDetail({products, cart, addCart}) {
   if(!product) getProduct()
 
   return (
-    <>
-      <Head>
-        <title>Detalle</title>
-      </Head>
-
-      <div className='flex flex-row'>
-        <div className='flex flex-col h-screen sm:w-full md:w-5/6'>
-          <div>
-            <Nav />
-          </div>
-          <div className="flex-1 overflow-y-auto">
-            <div className='grid grid-cols-2 md:grid-cols-4 gap-2 p-2'>
-              {/* {cartProd} */}
-            </div>
-          </div>
-          <Footer />
-        </div>
-        <Sidebar />
-      </div>
-    </>
+    <Layout title='Detalle'>
+      hola
+    </Layout>
   )
 }
 
