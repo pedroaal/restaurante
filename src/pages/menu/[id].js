@@ -1,7 +1,8 @@
-import Head from 'next/head';
 import { useState } from 'react';
 import { useSession } from 'next-auth/client';
-import { baseAPI } from 'config/api'
+import { useRouter } from 'next/router'
+import Head from 'next/head';
+import { baseURL, baseAPI } from 'config/api';
 
 import {
   addCart,
@@ -10,12 +11,7 @@ import { connect } from 'react-redux';
 
 import Nav from '@/organisms/header';
 import Footer from '@/organisms/footer';
-import Categories from '@/organisms/categories';
 import Sidebar from '@/organisms/sidebar';
-
-// import Producto from '@/molecules/product'
-import Skeleton from '@/molecules/skeleton';
-import Producto from '@/components/molecules/product';
 
 export async function getServerSideProps(context) {
   return {
@@ -25,25 +21,51 @@ export async function getServerSideProps(context) {
   }
 }
 
-function ProductDetail({product, addCart}) {
+const myLoader = (src) => {
+  return `${baseURL}${src}`
+}
+
+function ProductDetail({products, cart, addCart}) {
+  const router = useRouter()
+  const {id} = router.query
+  console.log(id);
+
+  const cartProdInit = {
+    quantity: 0,
+    price: 0,
+    product_id: id
+  }
+
   const [session] = useSession();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
+  const [cartProd, setCartProd] = useState(cartProdInit)
+  const [product, setProduct] = useState()
+
+  const getProduct = () => {
+    fetch(`${baseAPI}products/${id}`)
+      .then(res => res.json())
+      .then(data => {
+        setProduct(data);
+        setLoading(false);
+      })
+  }
+
+  if(!product) getProduct()
 
   return (
     <>
       <Head>
-        <title>Menú</title>
+        <title>Detalle</title>
       </Head>
 
       <div className='flex flex-row'>
         <div className='flex flex-col h-screen sm:w-full md:w-5/6'>
           <div>
             <Nav />
-            <Categories />
           </div>
           <div className="flex-1 overflow-y-auto">
             <div className='grid grid-cols-2 md:grid-cols-4 gap-2 p-2'>
-              {producto}
+              {/* {cartProd} */}
             </div>
           </div>
           <Footer />
@@ -57,6 +79,7 @@ function ProductDetail({product, addCart}) {
 const mapStateToProps = state => ({
   // all: state,
   cart: state.cartReducer,
+  products: state.productReducer.products_all,
 })
 
 const mapDispatchToProps = {
