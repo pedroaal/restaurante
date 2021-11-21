@@ -13,7 +13,7 @@ export async function getServerSideProps(context) {
 export default function Footer() {
   return (
     <>
-      <div className='flex'>
+      <div className='flex items-center'>
         <div className='p-4 w-1/2 flex justify-center'>
           <Link href='/'>
             <FaQrcode />
