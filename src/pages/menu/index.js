@@ -8,7 +8,7 @@ import {
 } from '@/redux/actions'
 import { connect } from 'react-redux';
 
-import Layout from '@/components/layouts/layout';
+import Layout from '@/layouts/layout';
 import GridSkeleton from '@/organisms/gridSkeleton';
 import GridProducts from '@/organisms/gridProducts';
 

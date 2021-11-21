@@ -13,8 +13,8 @@ import {
 import { connect } from 'react-redux';
 
 import Skeleton from '@/molecules/skeleton';
-import Layout from '@/components/layouts/layout';
-import ContentLayout from '@/components/layouts/contentLayout';
+import Layout from '@/layouts/layout';
+import ContentLayout from '@/layouts/contentLayout';
 
 export async function getServerSideProps(context) {
   return {

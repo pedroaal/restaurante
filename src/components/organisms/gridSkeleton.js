@@ -1,5 +1,5 @@
 import Skeleton from '@/molecules/skeleton';
-import GridLayout from '@/components/layouts/gridLayout';
+import GridLayout from '@/layouts/gridLayout';
 
 const GridSkeleton = () => {
   return (

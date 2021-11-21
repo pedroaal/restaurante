@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import ContentLayout from '@/components/layouts/contentLayout';
+import ContentLayout from '@/layouts/contentLayout';
 import Image from '@/atoms/image';
 import Layout from '@/layouts/layout';
 import Button from '@/atoms/button';
