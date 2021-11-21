@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
-import Producto from '@/molecules/product';
-import GridLayout from '@/layouts/gridLayout';
+import Producto from '@molecules/product';
+import GridLayout from '@layouts/gridLayout';
 
 const GridProducts = ({ filtered }) => {
   return (

@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import ContentLayout from '@/layouts/contentLayout';
-import Image from '@/atoms/image';
-import Layout from '@/layouts/layout';
-import Button from '@/atoms/button';
+import ContentLayout from '@layouts/contentLayout';
+import Image from '@atoms/image';
+import Layout from '@layouts/layout';
+import Button from '@atoms/button';
 import { toast } from 'react-toastify';
 
 export async function getServerSideProps(context) {

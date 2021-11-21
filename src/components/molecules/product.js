@@ -2,7 +2,7 @@ import React from 'react';
 import { baseURL } from '@/config/api';
 import Link from 'next/link';
 
-import Image from '@/atoms/image';
+import Image from '@atoms/image';
 
 const myLoader = (src) => {
   return `${baseURL}${src}`

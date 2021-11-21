@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Sidebar from '@/organisms/sidebar';
+import Sidebar from '@organisms/sidebar';
 import Link from 'next/link';
 import { FaSearch, FaBars } from 'react-icons/fa';
 

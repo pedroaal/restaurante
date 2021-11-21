@@ -3,11 +3,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/client';
-import QR from '@/molecules/qr';
+import QR from '@molecules/qr';
 
 export async function getServerSideProps(context) {
   // await dbConnect();
-  
+
   // const products = await Product.find({}).exec();
 
   return {
@@ -17,7 +17,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default function Home({}) {
+export default function Home({ }) {
   // const [asyncUsers, setAsyncUsers] = useState([]);
   // const [loading, setLoading] = useState(true);
 
@@ -32,7 +32,7 @@ export default function Home({}) {
   //   }, 1000);
   // }, [])
 
-  const [ session, loading ] = useSession();
+  const [session, loading] = useSession();
 
   return (
     <div className='screen-centered'>
@@ -44,15 +44,15 @@ export default function Home({}) {
 
       <main className=''>
         <QR />
-        {!session && 
+        {!session &&
           <>
             <button onClick={() => signIn()} className="btn bg-black text-white mx-auto">Iniciar Sesión</button>
           </>
         }
-        {session && 
+        {session &&
           <>
             <h3 className='mx-auto text-center'>
-              Bienvenido {session.user.email} <br/>
+              Bienvenido {session.user.email} <br />
             </h3>
             <button onClick={() => signOut()} className="btn bg-black text-white mx-auto">Cerrar Sesión</button>
           </>

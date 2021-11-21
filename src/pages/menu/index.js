@@ -8,9 +8,9 @@ import {
 } from '@/redux/actions'
 import { connect } from 'react-redux';
 
-import Layout from '@/layouts/layout';
-import GridSkeleton from '@/organisms/gridSkeleton';
-import GridProducts from '@/organisms/gridProducts';
+import Layout from '@layouts/layout';
+import GridSkeleton from '@organisms/gridSkeleton';
+import GridProducts from '@organisms/gridProducts';
 
 export async function getServerSideProps(context) {
   return {
