@@ -8,9 +8,9 @@ import {
 } from '@/redux/actions'
 import { connect } from 'react-redux';
 
-import Layout from '@/components/layout';
-import Skeleton from '@/molecules/skeleton';
-import Producto from '@/molecules/product';
+import Layout from '@/components/layouts/layout';
+import GridSkeleton from '@/organisms/gridSkeleton';
+import GridProducts from '@/organisms/gridProducts';
 
 export async function getServerSideProps(context) {
   return {
@@ -20,10 +20,9 @@ export async function getServerSideProps(context) {
   }
 }
 
-function Home({products, setProducts, filtered, setFiltered}) {
+function Home({ products, setProducts, filtered, setFiltered }) {
   const [session] = useSession();
-  const [loading, setLoading] = useState(true);
-  // const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(products.length ? false : true);
 
   const saveProducts = () => {
     fetch(`${baseAPI}products`)
@@ -35,21 +34,18 @@ function Home({products, setProducts, filtered, setFiltered}) {
       })
   }
 
-  if(products.length <= 0){
+  if (products.length <= 0) {
     saveProducts()
   }
 
-  const skeleton = (n) => (
-    <Skeleton key={n} />
-  );
-
-  const makeProd = (producto) => (
-    <Producto producto={producto} key={producto._id} />
-  );
-
   return (
-    <Layout title='Menu' categories={true}>
-      {loading ? [1,2,3,4].map(i => skeleton(i)) : filtered.length > 0 ?  filtered.map(prod => makeProd(prod)) : 'Sin datos' }
+    <Layout title='Menú' categories={true}>
+      {loading ?
+        <GridSkeleton /> :
+        filtered.length > 0 ?
+          <GridProducts /> :
+          'Sin datos'
+      }
     </Layout>
   )
 }
@@ -62,7 +58,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   setProducts: setProducts,
-  setFiltered:setFiltered,
+  setFiltered: setFiltered,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

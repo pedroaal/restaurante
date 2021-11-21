@@ -5,9 +5,9 @@ import Footer from '@/organisms/footer';
 import Categories from '@/organisms/categories';
 import Sidebar from '@/organisms/sidebar';
 
-function Layout({children, title, categories=false}) {
+function Layout({ children, title, categories = false }) {
   return (
-    <>
+    <div className='min-w-full'>
       <Head>
         <title>{title}</title>
       </Head>
@@ -18,16 +18,12 @@ function Layout({children, title, categories=false}) {
             <Nav />
             {categories ? <Categories /> : ''}
           </div>
-          <div className="flex-1 overflow-y-auto">
-            <div className='grid grid-cols-2 md:grid-cols-4 gap-2 p-2'>
-              {children}
-            </div>
-          </div>
+          {children}
           <Footer />
         </div>
-        <Sidebar />
+        {/* <Sidebar /> */}
       </div>
-    </>
+    </div>
   )
 }
 

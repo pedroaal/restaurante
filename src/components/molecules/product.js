@@ -11,10 +11,10 @@ const myLoader = (src) => {
 //   return 'slug'
 // }
 
-export default function Producto({producto}) {
+export default function Producto({ producto }) {
   return (
     <Link href='/menu/[slug]' as={`/menu/${producto._id}`}>
-      <div className="max-w-sm rounded overflow-hidden shadow-lg">
+      <div className="w-full rounded overflow-hidden shadow-lg">
         <img className="w-full" src={myLoader('helado.jpeg')} alt={producto.name} />
         <div className="px-6 py-4">
           <div className="font-bold text-xl mb-2">{producto.name}</div>
