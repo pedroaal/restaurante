@@ -18,7 +18,9 @@ function Layout({ children, title, categories = false }) {
             <Nav />
             {categories ? <Categories /> : ''}
           </div>
-          {children}
+          <div className="flex-1 overflow-y-auto p-2">
+            {children}
+          </div>
           <Footer />
         </div>
         <Sidebar />
