@@ -7,7 +7,7 @@ const GridProducts = ({ filtered }) => {
   return (
     <GridLayout>
       {filtered.map(producto => (
-        <Producto producto={producto} key={producto.name} />
+        <Producto producto={producto} key={producto._id} />
       ))}
     </GridLayout>
   )
