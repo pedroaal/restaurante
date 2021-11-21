@@ -43,7 +43,7 @@ function Categories({ products, filtered, setFiltered }) {
   return (
     <div className='flex flex-nowrap w-full p-1 overflow-x-auto'>
       <button className="btn-sm bg-gray-200" key='refresh' onClick={() => filterProducts(null)}>
-        <FaUndo />
+        &nbsp;<FaUndo />&nbsp;
       </button>
       {loading ? skeleton() : categories.map((cat) => (
         <button className="btn-sm bg-gray-200" key={cat._id} onClick={() => filterProducts(cat._id)}>{cat.name}</button>
