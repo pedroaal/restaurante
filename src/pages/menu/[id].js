@@ -12,8 +12,9 @@ import {
 } from '@/redux/actions'
 import { connect } from 'react-redux';
 
-import Layout from '@/components/layouts/layout';
 import Skeleton from '@/molecules/skeleton';
+import Layout from '@/components/layouts/layout';
+import ContentLayout from '@/components/layouts/contentLayout';
 
 export async function getServerSideProps(context) {
   return {
@@ -97,7 +98,7 @@ function ProductDetail({ cart, addCart }) {
     addCart(cartProd)
   }
   const productDetail = () => (
-    <div className='grid grid-cols-1 md:grid-cols-2'>
+    <ContentLayout>
       <Image
         loader={myLoader}
         src='helado.jpeg'
@@ -110,13 +111,13 @@ function ProductDetail({ cart, addCart }) {
         <h2>{product.description}</h2>
         <div className='flex'>
           <FaMinus className='flex-1' onClick={restQty} />
-          <p className='flex-1'>{cartProd.quantity}</p>
+          <p className='flex-1 text-center'>{cartProd.quantity}</p>
           <FaPlus className='flex-1' onClick={addQty} />
         </div>
         <p>Precio: {cartProd.price}</p>
         <FaCartPlus className='flex-1' onClick={saveCart} />
       </div>
-    </div>
+    </ContentLayout>
   )
 
   return (

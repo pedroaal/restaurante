@@ -13,7 +13,7 @@ function Layout({ children, title, categories = false }) {
       </Head>
 
       <div className='flex flex-row'>
-        <div className='flex flex-col h-screen sm:w-full md:w-5/6'>
+        <div className='flex flex-col h-screen w-full md:w-5/6'>
           <div>
             <Nav />
             {categories ? <Categories /> : ''}
@@ -21,7 +21,7 @@ function Layout({ children, title, categories = false }) {
           {children}
           <Footer />
         </div>
-        {/* <Sidebar /> */}
+        <Sidebar />
       </div>
     </div>
   )
