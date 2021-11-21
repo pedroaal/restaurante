@@ -4,12 +4,9 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/client';
 import QR from '@molecules/qr';
+import Button from '@atoms/button';
 
 export async function getServerSideProps(context) {
-  // await dbConnect();
-
-  // const products = await Product.find({}).exec();
-
   return {
     props: {
       // products: jsonify(products),
@@ -17,20 +14,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default function Home({ }) {
-  // const [asyncUsers, setAsyncUsers] = useState([]);
-  // const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     fetch('/api/users')
-  //     .then(res => res.json())
-  //     .then(json => {
-  //       setAsyncUsers(json);
-  //       setLoading(false);
-  //     })
-  //   }, 1000);
-  // }, [])
+export default function Home() {
 
   const [session, loading] = useSession();
 
@@ -45,20 +29,19 @@ export default function Home({ }) {
       <main className=''>
         <QR />
         {!session &&
-          <>
-            <button onClick={() => signIn()} className="btn bg-black text-white mx-auto">Iniciar Sesión</button>
-          </>
+          <Button title='Iniciar Sesión' action={signIn} />
         }
         {session &&
           <>
             <h3 className='mx-auto text-center'>
               Bienvenido {session.user.email} <br />
             </h3>
-            <button onClick={() => signOut()} className="btn bg-black text-white mx-auto">Cerrar Sesión</button>
+            <Button title='Cerrar Sesión' action={signOut} />
           </>
         }
         <Link href="/menu">
-          <button className="btn bg-black text-white mx-auto" type="submit">Menu</button>
+          <button className="btn bg-black text-white mx-auto" type="submit">Menú</button>
+          {/* <Button title='Menú' type='submit' /> */}
         </Link>
       </main>
     </div>
