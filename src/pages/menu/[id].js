@@ -98,7 +98,7 @@ function ProductDetail({ cart, addCart }) {
     addCart(cartProd)
   }
   const productDetail = () => (
-    <ContentLayout>
+    <>
       <Image
         loader={myLoader}
         src='helado.jpeg'
@@ -117,15 +117,17 @@ function ProductDetail({ cart, addCart }) {
         <p>Precio: {cartProd.price}</p>
         <FaCartPlus className='flex-1' onClick={saveCart} />
       </div>
-    </ContentLayout>
+    </>
   )
 
   return (
     <Layout title='Detalle | slug'>
-      {loading ?
-        <Skeleton key={1} /> :
-        productDetail()
-      }
+      <ContentLayout>
+        {loading ?
+          <Skeleton key={1} /> :
+          productDetail()
+        }
+      </ContentLayout>
     </Layout>
   )
 }
