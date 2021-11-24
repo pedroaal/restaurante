@@ -1,16 +1,9 @@
 import { connect } from 'react-redux';
 import ContentLayout from '@layouts/contentLayout';
-import Image from '@atoms/image';
+import Image from 'next/image';
 import Layout from '@layouts/layout';
 import Button from '@atoms/button';
 import { toast } from 'react-toastify';
-
-export async function getServerSideProps(context) {
-  return {
-    props: {
-    }
-  }
-}
 
 function Cart({ cart }) {
   const ordenar = () => {
@@ -23,7 +16,12 @@ function Cart({ cart }) {
       <ContentLayout>
         {cart.map(item => (
           <div key={item.product._id} className='grid grid-cols-3 gap-2'>
-            <Image name={item.product.name} url={item.product.img} />
+            <Image
+              src='/helado.jpeg'
+              alt={product.name}
+              width='100%'
+              height='100%'
+            />
             <div className='col-span-2'>
               <p>{item.product.name}</p>
               <p>Cantidad: {item.quantity}</p>

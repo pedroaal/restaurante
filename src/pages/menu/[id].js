@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { baseURL, baseAPI } from 'config/api';
+import { baseAPI } from 'config/api';
 
 import {
   addCart,
@@ -24,9 +24,6 @@ export async function getServerSideProps(context) {
   }
 }
 
-const myLoader = ({ src }) => {
-  return `${baseURL}${src}`
-}
 toast.configure()
 
 function ProductDetail({ cart, addCart }) {
@@ -100,8 +97,7 @@ function ProductDetail({ cart, addCart }) {
   const productDetail = () => (
     <>
       <Image
-        loader={myLoader}
-        src='helado.jpeg'
+        src='/helado.jpeg'
         alt={product.name}
         width='100%'
         height='100%'
