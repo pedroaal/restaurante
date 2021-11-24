@@ -14,6 +14,7 @@
     "next": "10.2.0",
     "next-auth": "^3.22.0",
     "next-connect": "^0.10.1",
+    "next-redux-wrapper": "^7.0.5",
     "postcss-easy-import": "^3.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -21,7 +22,8 @@
     "react-redux": "^7.2.4",
     "react-toastify": "^8.1.0",
     "redux": "^4.1.0",
-    "redux-devtools-extension": "^2.13.9"
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.3.1",

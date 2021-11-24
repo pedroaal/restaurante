@@ -1,5 +1,6 @@
 import React from 'react';
 import { Provider } from 'next-auth/client';
+import { createWrapper } from 'next-redux-wrapper';
 
 import { Provider as ReduxProvider } from 'react-redux';
 import store from '@/redux/store';
@@ -16,4 +17,7 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default MyApp
+const makeStore = () => store
+const wrapper = createWrapper(makeStore)
+
+export default wrapper.withRedux(MyApp)
