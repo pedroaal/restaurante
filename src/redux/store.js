@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware } from 'redux';
-// import { HYDRATE, createWrapper } from 'next-redux-wrapper';
+import { createWrapper } from 'next-redux-wrapper';
 // import { ThunkMiddleware } from 'redux-thunk';
 import thunk from 'redux-thunk';
 import rootReducer from '@/redux/reducers';
-import { composeWithDevTools } from 'redux-devtools-extension';
+// import { composeWithDevTools } from 'redux-devtools-extension';
 
 const middleware = [thunk]
 
@@ -17,9 +17,14 @@ const bindMiddleware = middleware => {
 }
 // const composeEnhancers = composeWithDevTools();
 
-const store = createStore(
-  rootReducer,
-  bindMiddleware(middleware)
-)
+const makeStore = () => {
+  return createStore(
+    rootReducer,
+    bindMiddleware(middleware)
+  )
+}
 
-export default store
+const wrapper = createWrapper(makeStore)
+
+// export default store
+export default wrapper

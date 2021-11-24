@@ -1,20 +1,20 @@
-import { useState } from 'react';
-import { FaPlus, FaMinus, FaCartPlus } from 'react-icons/fa';
-import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-import { useSession } from 'next-auth/client';
-import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { useState } from 'react';
 import { baseAPI } from 'config/api';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/client';
 
 import {
   addCart,
 } from '@/redux/actions'
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import Skeleton from '@molecules/skeleton';
+import { toast } from "react-toastify";
+
 import Layout from '@layouts/layout';
+import Skeleton from '@molecules/skeleton';
 import ContentLayout from '@layouts/contentLayout';
+import { FaPlus, FaMinus, FaCartPlus } from 'react-icons/fa';
 
 export async function getServerSideProps(context) {
   return {
@@ -26,7 +26,10 @@ export async function getServerSideProps(context) {
 
 toast.configure()
 
-function ProductDetail({ cart, addCart }) {
+function ProductDetail() {
+  const dispatch = useDispatch()
+  const cart = useSelector(state => state.cartReducer.cart)
+
   const router = useRouter()
   const { id } = router.query
   const cartProdInit = {
@@ -92,15 +95,15 @@ function ProductDetail({ cart, addCart }) {
       return
     }
 
-    addCart(cartProd)
+    dispatch(addCart(cartProd))
   }
   const productDetail = () => (
     <>
       <Image
         src='/helado.jpeg'
         alt={product.name}
-        width='100%'
-        height='100%'
+        width='w-full'
+        height='h-full'
       />
       <div>
         <h1>{product.name}</h1>
@@ -128,14 +131,4 @@ function ProductDetail({ cart, addCart }) {
   )
 }
 
-const mapStateToProps = state => ({
-  // all: state,
-  cart: state.cartReducer.cart,
-  // products: state.productReducer.products_all,
-})
-
-const mapDispatchToProps = {
-  addCart
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);
+export default ProductDetail;

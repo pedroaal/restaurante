@@ -1,9 +1,11 @@
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import Producto from '@molecules/product';
 import GridLayout from '@layouts/gridLayout';
 
-const GridProducts = ({ filtered }) => {
+const GridProducts = () => {
+  const filtered = useSelector(state => state.productReducer.products_filtered)
+
   return (
     <GridLayout>
       {filtered.map(producto => (
@@ -13,11 +15,4 @@ const GridProducts = ({ filtered }) => {
   )
 }
 
-const mapStateToProps = state => ({
-  filtered: state.productReducer.products_filtered,
-})
-
-const mapDispatchToProps = {
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(GridProducts);
+export default GridProducts;

@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from 'react';
 import { baseAPI } from '@/config/api';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+
 import { setFiltered } from '@/redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { FaUndo } from 'react-icons/fa';
 
-export async function getServerSideProps(context) {
-  return {
-    props: {
-    }
-  }
-}
+// export async function getServerSideProps(context) {
+//   return {
+//     props: {
+//     }
+//   }
+// }
 
-function Categories({ products, filtered, setFiltered }) {
+function Categories() {
+
+  const dispatch = useDispatch()
+  const products = useSelector(state => state.productReducer.products_all)
+
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
 
@@ -33,11 +38,11 @@ function Categories({ products, filtered, setFiltered }) {
 
   const filterProducts = key => {
     if (key) {
-      setFiltered(products.filter(prod => prod.category_id == key))
+      dispatch(setFiltered(products.filter(prod => prod.category_id == key)))
       return
     }
 
-    setFiltered([...products])
+    dispatch(setFiltered([...products]))
   }
 
   return (
@@ -52,14 +57,4 @@ function Categories({ products, filtered, setFiltered }) {
   )
 }
 
-const mapStateToProps = state => ({
-  // all: state,
-  products: state.productReducer.products_all,
-  filtered: state.productReducer.products_filtered,
-})
-
-const mapDispatchToProps = {
-  setFiltered: setFiltered,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Categories);
+export default Categories;

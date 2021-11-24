@@ -8,9 +8,9 @@ export default function Producto({ producto }) {
       <div className="w-full rounded overflow-hidden shadow-lg">
         <Image
           src='/helado.jpeg'
-          alt={product.name}
-          width='100%'
-          height='100%'
+          alt={producto.name}
+          width='w-full'
+          height='h-full'
         />
         <div className="px-6 py-4">
           <div className="font-bold text-xl mb-2">{producto.name}</div>

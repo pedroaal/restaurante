@@ -1,11 +1,16 @@
-import { connect } from 'react-redux';
-import ContentLayout from '@layouts/contentLayout';
 import Image from 'next/image';
-import Layout from '@layouts/layout';
-import Button from '@atoms/button';
+
+import { useSelector } from 'react-redux';
+
 import { toast } from 'react-toastify';
 
-function Cart({ cart }) {
+import Button from '@atoms/button';
+import Layout from '@layouts/layout';
+import ContentLayout from '@layouts/contentLayout';
+
+function Cart() {
+  const cart = useSelector(state => state.cartReducer.cart)
+
   const ordenar = () => {
     toast.success('Ordenando...');
     return
@@ -18,7 +23,7 @@ function Cart({ cart }) {
           <div key={item.product._id} className='grid grid-cols-3 gap-2'>
             <Image
               src='/helado.jpeg'
-              alt={product.name}
+              alt={item.product.name}
               width='100%'
               height='100%'
             />
@@ -35,10 +40,4 @@ function Cart({ cart }) {
   )
 }
 
-const mapStateToProps = state => ({
-  cart: state.cartReducer.cart,
-})
-
-const mapDispatchToProps = {}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default Cart;
