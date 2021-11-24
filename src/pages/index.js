@@ -6,17 +6,11 @@ import { signIn, signOut, useSession } from 'next-auth/client';
 import QR from '@molecules/qr';
 import Button from '@atoms/button';
 
-export async function getServerSideProps(context) {
-  return {
-    props: {
-      // products: jsonify(products),
-    }
-  }
-}
-
 export default function Home() {
 
   const [session, loading] = useSession();
+  const a = process.env.APP_URL
+  console.log(a);
 
   return (
     <div className='screen-centered'>
@@ -43,6 +37,7 @@ export default function Home() {
           <button className="btn bg-black text-white mx-auto" type="submit">Menú</button>
           {/* <Button title='Menú' type='submit' /> */}
         </Link>
+        <p>{ }</p>
       </main>
     </div>
   )
