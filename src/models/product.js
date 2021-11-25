@@ -62,4 +62,5 @@ schema.method('getIva', () => {
   return this.iva_id;
 });
 
-export default mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema, 'products');
+const productModel = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema, 'products')
+export { productModel as default, schema }

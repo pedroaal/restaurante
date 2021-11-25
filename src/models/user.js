@@ -1,4 +1,4 @@
-import mongoose, {Schema, model, models} from 'mongoose';
+import mongoose, { Schema, model, models } from 'mongoose';
 
 const MODEL_NAME = 'User';
 
@@ -85,13 +85,13 @@ const schema = new Schema(
   },
 );
 
-schema.method('getName', function(){
+schema.method('getName', function () {
   return this.firstName;
 });
 
-schema.method('getCompleteName', function(){
+schema.method('getCompleteName', function () {
   return this.firstName + ' ' + this.lastName;
 });
 
-
-export default models[MODEL_NAME] || model(MODEL_NAME, schema, 'users');
+const userModel = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema, 'users')
+export default userModel;

@@ -30,4 +30,5 @@ const schema = new Schema(
   }
 );
 
-export default mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema, 'categories');
+const categoryModel = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema, 'categories')
+export default categoryModel;

@@ -1,4 +1,4 @@
-import mongoose, {Schema} from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 const MODEL_NAME = 'Model';
 
@@ -16,4 +16,5 @@ const schema = new Schema(
   }
 );
 
-export default mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema, 'db_collection');
+const Model = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema, 'db_collection')
+export default Model;
