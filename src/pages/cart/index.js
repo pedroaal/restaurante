@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { baseAPI } from '@/config/api';
 
 import { useSelector } from 'react-redux';
 
@@ -8,11 +9,36 @@ import Button from '@atoms/button';
 import Layout from '@layouts/layout';
 import ContentLayout from '@layouts/contentLayout';
 
-function Cart() {
-  const cart = useSelector(state => state.cartReducer.cart)
+toast.configure()
 
-  const ordenar = () => {
-    toast.success('Ordenando...');
+function Cart() {
+  const order = useSelector(state => state.cartReducer)
+  const cart = useSelector(state => state.cartReducer.cart)
+  const coupon = useSelector(state => state.cartReducer.coupon)
+
+  const ordenar = async () => {
+    if (cart.length <= 0) {
+      toast.error('Primero agraga un producto al carrito');
+      return
+    }
+
+    const response = await toast.promise(
+      fetch(`${baseAPI}order`, {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(order),
+      }),
+      {
+        pending: 'Ordenando...',
+        success: 'Orden creada',
+        error: 'No hemos podido crear tu orden'
+      }
+    )
+    console.log(response);
+
     return
   }
 
