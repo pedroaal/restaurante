@@ -1,12 +1,11 @@
 import { dbConnect } from '@/utils/dbConnect';
 import Product from '@/models/product';
 
-export default async function(req, res) {
+export default async function (req, res) {
   await dbConnect()
-  const {method} = req
-  const {id} = req.query
-  console.log('id: ', id);
-  
+  const { method } = req
+  const { id } = req.query
+
   switch (method) {
     case 'GET':
       const product = await Product.findById(id);
