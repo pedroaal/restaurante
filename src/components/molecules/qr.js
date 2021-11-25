@@ -1,41 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import { useSelector, useDispatch } from "react-redux";
 
-export async function getServerSideProps(context) {
-  return {
-    props: {
-      // products: jsonify(products),
-    }
-  }
-}
+function QR() {
+  const store_id = useSelector(state => state.cartReducer.store_id)
+  const table = useSelector(state => state.cartReducer.table)
 
-export default function QR({}) {
-  const initialState = {
-    store_id: '',
-    table_id: ''
-  }
-  const [qrdata, setQrdata] = useState(initialState);
-  const [source, setSource] = useState("");
-  
   const handleCapture = (target) => {
     if (target.files) {
       if (target.files.length !== 0) {
         const file = target.files[0];
         const newUrl = URL.createObjectURL(file);
-        setSource(newUrl);
+        // setSource(newUrl);
       }
     }
   };
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     fetch('/api/users')
-  //     .then(res => res.json())
-  //     .then(json => {
-  //       setAsyncUsers(json);
-  //       setLoading(false);
-  //     })
-  //   }, 1000);
-  // }, [])
 
   return (
     <input
@@ -48,3 +25,5 @@ export default function QR({}) {
     />
   )
 }
+
+export default QR
