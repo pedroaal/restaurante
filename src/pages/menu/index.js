@@ -20,7 +20,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-function Home() {
+function Menu() {
   const [session] = useSession();
 
   const dispatch = useDispatch()
@@ -55,4 +55,4 @@ function Home() {
   )
 }
 
-export default Home;
+export default Menu;
