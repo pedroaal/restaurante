@@ -9,8 +9,6 @@ import Button from '@atoms/button';
 export default function Home() {
 
   const [session, loading] = useSession();
-  const a = process.env.APP_URL
-  console.log(a);
 
   return (
     <div className='screen-centered'>
@@ -35,11 +33,9 @@ export default function Home() {
         }
         <Link href="/menu">
           <button className="btn bg-black text-white mx-auto" type="submit">Menú</button>
-          {/* <Button title='Menú' type='submit' /> */}
         </Link>
         <Link href="/orders">
           <button className="btn bg-black text-white mx-auto" type="submit">Menú</button>
-          {/* <Button title='Menú' type='submit' /> */}
         </Link>
       </main>
     </div>
