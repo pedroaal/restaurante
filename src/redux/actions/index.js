@@ -1,26 +1,11 @@
-import * as types from '@/redux/types'
-
-export const getCart = payload => ({
-  type: types.GET_CART,
-  payload
-});
-
-export const addCart = payload => ({
-  type: types.ADD_CART,
-  payload
-});
-
-export const getProducts = payload => ({
-  type: types.GET_PRODUCTS,
-  payload
-});
+import { SET_PRODUCTS, FILTER_PRODUCTS } from '@/redux/types'
 
 export const setProducts = payload => ({
-  type: types.SET_PRODUCTS,
+  type: SET_PRODUCTS,
   payload
 });
 
 export const setFiltered = payload => ({
-  type: types.FILTER_PRODUCTS,
+  type: FILTER_PRODUCTS,
   payload
 });

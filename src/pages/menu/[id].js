@@ -6,7 +6,7 @@ import { useSession } from 'next-auth/client';
 
 import {
   addCart,
-} from '@/redux/actions'
+} from '@/redux/actions/cart'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { toast } from "react-toastify";

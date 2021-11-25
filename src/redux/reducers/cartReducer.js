@@ -1,5 +1,7 @@
-import * as types from '@/redux/types'
+import { ADD_CART } from '@/redux/types'
 import { toast } from 'react-toastify';
+
+toast.configure()
 
 const INITIAL_STATE = {
   store_id: '60f65544480e19e273dab114',
@@ -9,14 +11,9 @@ const INITIAL_STATE = {
   cart: []
 }
 
-toast.configure()
-
 const cartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case types.GET_CART:
-      return { ...state, cart: action.payload };
-      break;
-    case types.ADD_CART:
+    case ADD_CART:
       // Copio el cart actual
       let cart = state.cart
 

@@ -37,7 +37,10 @@ export default function Home() {
           <button className="btn bg-black text-white mx-auto" type="submit">Menú</button>
           {/* <Button title='Menú' type='submit' /> */}
         </Link>
-        <p>{ }</p>
+        <Link href="/orders">
+          <button className="btn bg-black text-white mx-auto" type="submit">Menú</button>
+          {/* <Button title='Menú' type='submit' /> */}
+        </Link>
       </main>
     </div>
   )

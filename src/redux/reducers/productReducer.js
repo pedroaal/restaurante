@@ -1,4 +1,7 @@
-import * as types from '@/redux/types'
+import { SET_PRODUCTS, FILTER_PRODUCTS } from '@/redux/types';
+// import { toast } from 'react-toastify';
+
+// toast.configure()
 
 const INITIAL_STATE = {
   products_all: [],
@@ -6,14 +9,11 @@ const INITIAL_STATE = {
 }
 
 const productReducer = (state = INITIAL_STATE, action) => {
-  switch(action.type) {
-    case types.SET_PRODUCTS:
+  switch (action.type) {
+    case SET_PRODUCTS:
       return { ...state, products_all: action.payload };
       break;
-    case types.GET_PRODUCTS:
-      return { ...state, products_all: action.payload };
-      break;
-    case types.FILTER_PRODUCTS:
+    case FILTER_PRODUCTS:
       return { ...state, products_filtered: action.payload };
       break;
     default:
