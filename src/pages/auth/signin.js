@@ -1,6 +1,10 @@
 import Head from 'next/head';
-import { useState, useEffect } from 'react'; 
-import { signIn, getCsrfToken } from 'next-auth/client'; 
+import { baseAPI } from '@/config/api';
+// import { useState, useEffect } from 'react';
+// import { signIn, getCsrfToken } from 'next-auth/client';
+import { getCsrfToken } from 'next-auth/client';
+
+import Button from '@atoms/button';
 
 export async function getServerSideProps(context) {
   const csrfToken = await getCsrfToken(context)
@@ -9,7 +13,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default function Signin({csrfToken}) {
+export default function Signin({ csrfToken }) {
   return (
     <div className='screen-centered'>
       <Head>
@@ -18,7 +22,7 @@ export default function Signin({csrfToken}) {
 
       <main className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col'>
         <h1 className='mb-2'>Iniciar Sesión</h1>
-        <form method='post' action='/api/auth/callback/credentials'>
+        <form method='post' action={`${baseAPI}auth/callback/credentials`}>
           <input type="hidden" name='csrfToken' value={csrfToken} />
           <div className="my-2">
             <label className="form-label" for="email">Email</label>
@@ -30,18 +34,15 @@ export default function Signin({csrfToken}) {
             <p className="text-red text-xs italic">Please choose a password.</p>
           </div>
           <div className="flex items-center justify-between">
-            <button className="btn bg-black text-white w-full mx-0" type="submit">
+            <Button className="w-full mx-0" type="submit">
               Iniciar Sesión
-            </button>
+            </Button>
             {/* <a className="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker" href="#">
               Forgot Password?
             </a> */}
           </div>
         </form>
       </main>
-
-      <footer className=''>
-      </footer>
     </div>
   )
 }

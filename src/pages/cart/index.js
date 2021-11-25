@@ -60,7 +60,7 @@ function Cart() {
             </div>
           </div>
         ))}
-        <Button title='Ordenar' action={ordenar} />
+        <Button className='w-full' action={ordenar}>Ordenar</Button>
       </ContentLayout>
     </Layout>
   )

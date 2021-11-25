@@ -1,8 +1,12 @@
 import Head from 'next/head';
-import Image from 'next/image';
-import { useState, useEffect } from 'react';
-import { signIn, signOut, useSession, getCsrfToken } from 'next-auth/client';
-import api from '@/config/api';
+import { useState } from 'react';
+import { baseAPI } from '@/config/api';
+// import { signIn, signOut, useSession, getCsrfToken } from 'next-auth/client';
+import { getCsrfToken } from 'next-auth/client';
+
+import { toast } from 'react-toastify';
+
+import Button from '@atoms/button';
 
 export async function getServerSideProps(context) {
   const csrfToken = await getCsrfToken(context)
@@ -11,7 +15,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default function Signin({csrfToken}) {
+export default function Signin({ csrfToken }) {
   const [loading, setLoading] = useState(false);
   const initialState = {
     firstName: '',
@@ -23,38 +27,25 @@ export default function Signin({csrfToken}) {
   const [user, setUser] = useState(initialState);
 
   const handleInput = (event) => {
-    const {name, value} = event.target;
-    setUser({...user, [name]: value});
+    const { name, value } = event.target;
+    setUser({ ...user, [name]: value });
   }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    const url = 'user/create';
-    await api
-      .post(url, user)
+    const url = `${baseAPI}user/create`;
+    await fetch(url, user)
       .then(res => {
         console.log(res.data);
-        // toast({
-        //   title: "Account created.",
-        //   description: "We've created your account for you.",
-        //   status: "success",
-        //   duration: 5000,
-        //   isClosable: true,
-        // });
-        setUser({...initialState});
+        toast.success('Usuario creado');
+        setUser({ ...initialState });
         setLoading(false);
         return res.data;
       })
       .catch(err => {
         console.log(err);
-        // toast({
-        //   title: "Oops",
-        //   description: "No hemos podido crear tu cuenta.",
-        //   status: "error",
-        //   duration: 5000,
-        //   isClosable: true,
-        // });
+        toast.error('No hemos podido crear tu cuenta');
         setLoading(false);
         return null;
       });
@@ -94,11 +85,11 @@ export default function Signin({csrfToken}) {
             <p className="text-red text-xs italic">Please choose a password.</p>
           </div>
           <div className="flex items-center justify-between">
-            <button className="btn bg-black hover:bg-gray text-white w-full mx-0" type="submit">
+            <Button className="w-full mx-0" type="submit">
               {loading ? 'Creando' : 'Registrarse'}
-            </button>
+            </Button>
           </div>
-        </form>   
+        </form>
       </main>
 
       <footer className=''>
