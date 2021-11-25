@@ -1,8 +1,6 @@
 import { dbConnect } from '@/utils/dbConnect';
 import Order from '@/models/order';
 
-import { toast } from 'react-toastify';
-
 export default async function (req, res) {
   await dbConnect()
   const { method } = req
