@@ -1,8 +1,9 @@
 import Head from 'next/head';
-import { baseAPI } from '@/config/api';
+import { baseAPI } from '@config/api';
 // import { useState, useEffect } from 'react';
 // import { signIn, getCsrfToken } from 'next-auth/client';
 import { getCsrfToken } from 'next-auth/client';
+import Link from 'next/link';
 
 import Button from '@atoms/button';
 
@@ -33,13 +34,14 @@ export default function Signin({ csrfToken }) {
             <input className="form-input" id="password" name="password" type="password" />
             <p className="text-red text-xs italic">Please choose a password.</p>
           </div>
-          <div className="flex items-center justify-between">
+          <div>
             <Button className="w-full mx-0" type="submit">
               Iniciar Sesión
             </Button>
             {/* <a className="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker" href="#">
               Forgot Password?
             </a> */}
+            <Link href='/auth/signup' className='w-full'>Crear cuenta</Link>
           </div>
         </form>
       </main>

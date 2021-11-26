@@ -1,4 +1,4 @@
-import { baseAPI } from '@/config/api';
+import { baseAPI } from '@config/api';
 import React, { useState, useEffect } from 'react';
 
 import { setFiltered } from '@/redux/actions';

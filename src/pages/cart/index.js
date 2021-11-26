@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { baseAPI } from '@/config/api';
+import { baseAPI } from '@config/api';
 
 import { useSelector } from 'react-redux';
 
