@@ -13,7 +13,6 @@ export default async function (req, res) {
       break
     case 'POST':
       const newModel = new Order(req.body);
-      console.log(newModel)
       newModel.save(err => {
         if (err) return res.status(500).send(err);
         return res.status(200).send(newModel);

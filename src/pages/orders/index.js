@@ -33,7 +33,6 @@ function Orders() {
   }
 
   if (orders.length <= 0 && !empty) {
-    console.log('getting...')
     saveOrders()
   }
 

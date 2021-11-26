@@ -1,17 +1,16 @@
 import { dbConnect } from '@/utils/dbConnect';
 import User from '@/models/user';
 
-export default async function(req, res) {
+export default async function (req, res) {
   await dbConnect()
   const {
     query: { id },
     method,
   } = req
-  
+
   switch (method) {
     case 'GET':
-      const user = await User.find({email: id});
-      console.log(user);
+      const user = await User.find({ email: id });
       res.status(200).json()
       break
     case 'PUT':
