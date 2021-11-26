@@ -17,7 +17,6 @@ const bindMiddleware = middleware => {
 const makeStore = () => {
   return createStore(
     rootReducer,
-    {},
     bindMiddleware(middleware)
   )
 }
