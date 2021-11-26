@@ -1,4 +1,9 @@
-import { SET_PRODUCTS, FILTER_PRODUCTS } from '@/redux/types'
+import { SET_CATEGORIES, SET_PRODUCTS, FILTER_PRODUCTS } from '@/redux/types'
+
+export const setCategories = payload => ({
+  type: SET_CATEGORIES,
+  payload
+});
 
 export const setProducts = payload => ({
   type: SET_PRODUCTS,
