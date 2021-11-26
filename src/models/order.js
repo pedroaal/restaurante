@@ -32,6 +32,11 @@ const schema = new Schema(
       type: [cart_product],
       required: true,
     },
+    finish: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
   // created_at, updated_at
   {

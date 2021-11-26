@@ -10,6 +10,7 @@ const INITIAL_STATE = {
 const orderReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_ORDERS:
+      console.log(action.payload)
       return { ...state, orders: action.payload };
       break;
     case END_ORDER:

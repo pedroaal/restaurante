@@ -6,4 +6,5 @@ export const FILTER_PRODUCTS = 'FILTER_PRODUCTS'
 export const ADD_CART = 'ADD_CART'
 
 // ORDERS
+export const SET_ORDERS = 'SET_ORDERS'
 export const END_ORDER = 'END_ORDER'
