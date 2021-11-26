@@ -1,13 +1,13 @@
 import { dbConnect } from '@/utils/dbConnect';
 import Category from '@/models/category';
 
-export default async function(req, res) {
+export default async function (req, res) {
   await dbConnect()
-  const {method} = req
-  
+  const { method } = req
+
   switch (method) {
     case 'GET':
-      const categories = await Category.find().exec();
+      const categories = await Category.find({});
       // console.log(categories);
       res.status(200).json(categories)
       break
