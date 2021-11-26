@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { baseAPI } from '@/config/api';
+import { useRouter } from 'next/router';
 
 import { toast } from 'react-toastify';
 
@@ -7,6 +8,7 @@ import Button from '@atoms/button';
 
 function Order({ order, order_id }) {
   const cart = order.cart
+  const router = useRouter()
 
   const terminar = async () => {
     const response = await toast.promise(
@@ -22,7 +24,10 @@ function Order({ order, order_id }) {
         }),
       })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+          console.log(data)
+          router.reload()
+        })
         .catch(err => console.log(err)),
       {
         pending: 'Terminando orden...',
@@ -34,7 +39,7 @@ function Order({ order, order_id }) {
   }
 
   const makeProduct = product => (
-    <div className='flex align-middle'>
+    <div className='flex align-middle' key={product.product._id}>
       <p className="flex-grow font-bold">{product.product.name}</p>
       <p>x {product.quantity}</p>
     </div>
