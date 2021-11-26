@@ -1,7 +1,7 @@
-import { SET_ORDERS, END_ORDER } from '@/redux/types'
-import { toast } from 'react-toastify';
+import { SET_ORDERS } from '@/redux/types'
+// import { toast } from 'react-toastify';
 
-toast.configure()
+// toast.configure()
 
 const INITIAL_STATE = {
   orders: []
@@ -12,10 +12,6 @@ const orderReducer = (state = INITIAL_STATE, action) => {
     case SET_ORDERS:
       console.log(action.payload)
       return { ...state, orders: action.payload };
-      break;
-    case END_ORDER:
-      toast.success('Orden terminada')
-      return { ...state };
       break;
     default:
       return state;

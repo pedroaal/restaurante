@@ -1,7 +1,37 @@
 import Link from 'next/link';
+import { baseAPI } from '@/config/api';
 
-function Order({ order }) {
+import { toast } from 'react-toastify';
+
+import Button from '@atoms/button';
+
+function Order({ order, order_id }) {
   const cart = order.cart
+
+  const terminar = async () => {
+    const response = await toast.promise(
+      fetch(`${baseAPI}order/${order_id}`, {
+        method: "PUT",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          ...order,
+          finish: true
+        }),
+      })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err)),
+      {
+        pending: 'Terminando orden...',
+        success: 'Orden terminada',
+        error: 'No hemos podido terminar tu orden'
+      }
+    )
+    console.log(response);
+  }
 
   const makeProduct = product => (
     <div className='flex align-middle'>
@@ -11,14 +41,15 @@ function Order({ order }) {
   )
 
   return (
-    <Link href=''>
-      <div className="w-full rounded overflow-hidden shadow-lg mb-4">
-        <div className="px-6 py-4">
-          <p className='mb-2'>Mesa: {order.table}</p>
-          {cart.map(product => makeProduct(product))}
-        </div>
+    // <Link href='/'>
+    <div className="w-full rounded overflow-hidden shadow-lg mb-4">
+      <div className="px-6 py-4">
+        <p className='mb-2'>Mesa: {order.table}</p>
+        {cart.map(product => makeProduct(product))}
+        <Button className='justify-self-end' action={terminar}>Terminar pedido</Button>
       </div>
-    </Link>
+    </div>
+    // </Link>
   )
 }
 

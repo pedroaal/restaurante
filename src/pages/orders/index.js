@@ -15,17 +15,24 @@ function Orders() {
   const orders = useSelector(state => state.orderReducer.orders)
 
   const [loading, setLoading] = useState(orders.length ? false : true);
+  const [empty, setEmpty] = useState(false);
 
   const saveOrders = () => {
     fetch(`${baseAPI}order`)
       .then(res => res.json())
       .then(data => {
+        if (data.length <= 0) {
+          setEmpty(true)
+        }
         dispatch(setOrders(data))
         setLoading(false);
+        setTimeout(() => {
+          setEmpty(false)
+        }, 3600 * 2);
       })
   }
 
-  if (orders.length <= 0) {
+  if (orders.length <= 0 && !empty) {
     console.log('getting...')
     saveOrders()
   }
@@ -33,7 +40,7 @@ function Orders() {
   return (
     <Layout title='Ordenes'>
       {orders.map(order => (
-        <Order order={order} key={order._id} />
+        <Order order={order} key={order._id} order_id={order._id} />
       ))}
     </Layout>
   )

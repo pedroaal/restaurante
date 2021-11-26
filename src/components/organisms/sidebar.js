@@ -2,13 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BiCartAlt, BiBarcodeReader } from "react-icons/bi";
 import Link from 'next/link';
 
-export async function getServerSideProps(context) {
-  return {
-    props: {
-    }
-  }
-}
-
 export default function Sidebar() {
   return (
     <div className='w-1/6 sm:w-auto hidden md:flex'>

@@ -3,13 +3,6 @@ import Sidebar from '@organisms/sidebar';
 import Link from 'next/link';
 import { FaSearch, FaBars } from 'react-icons/fa';
 
-export async function getServerSideProps(context) {
-  return {
-    props: {
-    }
-  }
-}
-
 export default function Nav() {
   return (
     <nav>
