@@ -1,27 +1,47 @@
-import { useState } from 'react';
-import { baseAPI } from 'config/api';
+// import { useState } from 'react';
+// import { baseAPI } from 'config/api';
 import { useSession } from 'next-auth/client';
 
-// import Category from '@/models/category';
-// import { dbConnect } from '@/utils/dbConnect';
+import Product from '@/models/product';
+import Category from '@/models/category';
+import { dbConnect } from '@/utils/dbConnect';
 
 import {
   setCategories,
   setProducts,
   setFiltered,
 } from '@/redux/actions';
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import Layout from '@layouts/layout';
-import GridSkeleton from '@organisms/gridSkeleton';
+// import GridSkeleton from '@organisms/gridSkeleton';
 import GridProducts from '@organisms/gridProducts';
 
-export async function getServerSideProps(context) {
-  const categories_res = await fetch(`${baseAPI}products/getCategories`)
-  const categories = await categories_res.json()
+// export async function getServerSideProps() {
+export async function getStaticProps() {
+  await dbConnect()
+  // const categories_res = await fetch(`${baseAPI}products/getCategories`)
+  // const categories = await categories_res.json()
+  const categories_res = await Category.find({})
+  const categories = categories_res.map(doc => {
+    const category = doc.toObject();
+    category._id = category._id.toString();
+    category.createdAt = category.createdAt.toString();
+    category.updatedAt = category.updatedAt.toString();
+    return category;
+  });
 
-  const products_res = await fetch(`${baseAPI}products`)
-  const products = await products_res.json()
+  // const products_res = await fetch(`${baseAPI}products`)
+  // const products = await products_res.json()
+  const products_res = await Product.find({}).limit(20)
+  const products = products_res.map(doc => {
+    const products = doc.toObject();
+    products._id = products._id.toString();
+    if (products.category_id)
+      products.category_id = products.category_id.toString();
+    return products;
+  });
 
   return {
     props: {

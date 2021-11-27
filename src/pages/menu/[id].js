@@ -1,8 +1,11 @@
 import Image from 'next/image';
 import { useState } from 'react';
-import { baseAPI } from 'config/api';
+// import { baseAPI } from 'config/api';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/client';
+
+import Product from '@/models/product';
+import { dbConnect } from '@/utils/dbConnect';
 
 import {
   addCart,
@@ -12,13 +15,34 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 
 import Layout from '@layouts/layout';
-import Skeleton from '@molecules/skeleton';
+// import Skeleton from '@molecules/skeleton';
 import ContentLayout from '@layouts/contentLayout';
 import { FaPlus, FaMinus, FaCartPlus } from 'react-icons/fa';
 
-export async function getServerSideProps({ params }) {
-  const product_res = await fetch(`${baseAPI}products/${params.id}`)
-  const product = await product_res.json()
+export async function getStaticPaths() {
+  await dbConnect()
+  // const products_res = await fetch(`${baseAPI}products`)
+  // const products = await products_res.json()
+  const products = await Product.find({})
+  const paths = products.map(({ _id }) => ({ params: { id: `${_id}` } }))
+
+  return {
+    paths,
+    fallback: false,
+    // fallback: 'blocking'
+  }
+}
+
+// export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
+  await dbConnect()
+  // const product_res = await fetch(`${baseAPI}products/${params.id}`)
+  // const product = await product_res.json()
+  const doc = await Product.findById(params.id).limit(20)
+  const product = doc.toObject();
+  product._id = product._id.toString();
+  if (product.category_id)
+    product.category_id = product.category_id.toString();
 
   return {
     props: {
@@ -72,27 +96,31 @@ function ProductDetail({ product }) {
       toast('Máximo alcanzado')
       return
     }
-    const qty = cartProd.quantity + 1
-    let state = {
+    const quantity = cartProd.quantity + 1
+    const price = product.price * quantity
+    const state = {
       ...cartProd,
-      quantity: qty,
-      price: product.price * qty,
+      quantity,
+      price,
     }
     setCartProd(state)
   }
+
   const restQty = () => {
     if (cartProd.quantity <= 0) {
       toast.error('Mínimo alcanzado')
       return
     }
-    const qty = cartProd.quantity - 1
-    let state = {
+    const quantity = cartProd.quantity - 1
+    const price = product.price * quantity
+    const state = {
       ...cartProd,
-      quantity: qty,
-      price: product.price * qty,
+      quantity,
+      price,
     }
     setCartProd(state)
   }
+
   const saveCart = () => {
     if (cartProd.quantity <= 0) {
       toast.error('Aumenta la cuenta')
@@ -101,6 +129,7 @@ function ProductDetail({ product }) {
 
     dispatch(addCart(cartProd))
   }
+
   const productDetail = () => (
     <>
       <Image
@@ -126,10 +155,11 @@ function ProductDetail({ product }) {
   return (
     <Layout title='Detalle | slug'>
       <ContentLayout>
-        {loading ?
+        {/* {loading ?
           <Skeleton key={1} /> :
           productDetail()
-        }
+        } */}
+        {productDetail()}
       </ContentLayout>
     </Layout>
   )
