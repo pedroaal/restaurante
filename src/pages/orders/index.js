@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { baseAPI } from '@config/api';
 import { useSession } from "next-auth/client";
+import { useRouter } from 'next/router';
 
 import { setOrders } from '@/redux/actions/orders'
 import { useSelector, useDispatch } from "react-redux";
@@ -8,8 +9,9 @@ import { useSelector, useDispatch } from "react-redux";
 import Layout from "@layouts/layout";
 import Order from "@molecules/order";
 
-function Orders() {
+function Orders({ orders }) {
   const [session] = useSession();
+  const router = useRouter()
 
   const dispatch = useDispatch()
   const orders = useSelector(state => state.orderReducer.orders)
@@ -36,11 +38,19 @@ function Orders() {
     saveOrders()
   }
 
+  setTimeout(() => {
+    router.reload()
+  }, 3600 * 2);
+
   return (
     <Layout title='Ordenes'>
-      {orders.map(order => (
-        <Order order={order} key={order._id} order_id={order._id} />
-      ))}
+      {
+        orders.length > 0 ?
+          orders.map(order => (
+            <Order order={order} key={order._id} order_id={order._id} />
+          )) :
+          'Sin ordenes'
+      }
     </Layout>
   )
 }

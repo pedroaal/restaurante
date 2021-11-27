@@ -16,17 +16,20 @@ import Skeleton from '@molecules/skeleton';
 import ContentLayout from '@layouts/contentLayout';
 import { FaPlus, FaMinus, FaCartPlus } from 'react-icons/fa';
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps({ params }) {
+  const product_res = await fetch(`${baseAPI}products/${params.id}`)
+  const product = await product_res.json()
+
   return {
     props: {
-      // products: jsonify(products),
+      product
     }
   }
 }
 
 toast.configure()
 
-function ProductDetail() {
+function ProductDetail({ product }) {
   const dispatch = useDispatch()
   const cart = useSelector(state => state.cartReducer.cart)
 
@@ -35,31 +38,32 @@ function ProductDetail() {
   const cartProdInit = {
     quantity: 0,
     price: 0,
-    product: null
+    // product: null
+    product
   }
 
   const [session] = useSession();
-  const [loading, setLoading] = useState(true)
+  // const [loading, setLoading] = useState(true)
   const [cartProd, setCartProd] = useState(cartProdInit)
-  const [product, setProduct] = useState()
+  // const [product, setProduct] = useState()
 
-  const getProduct = () => {
-    fetch(`${baseAPI}products/${id}`)
-      .then(res => res.json())
-      .then(data => {
-        setProduct(data);
-        setCartProd({
-          ...cartProd,
-          product: data
-        })
-        setLoading(false);
-      })
-  }
+  // const getProduct = () => {
+  //   fetch(`${baseAPI}products/${id}`)
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setProduct(data);
+  //       setCartProd({
+  //         ...cartProd,
+  //         product: data
+  //       })
+  //       setLoading(false);
+  //     })
+  // }
 
-  if (!product) getProduct()
+  // if (!product) getProduct()
 
   if (cart.length > 0 && cartProd.quantity == 0) {
-    const prodIndx = cart.findIndex(product => product.product._id == id)
+    const prodIndx = cart.findIndex(cart_prod => cart_prod.product._id == id)
     if (prodIndx >= 0) setCartProd(cart[prodIndx])
   }
 
