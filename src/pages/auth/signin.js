@@ -1,9 +1,8 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { baseAPI } from '@config/api';
-// import { useState, useEffect } from 'react';
 // import { signIn, getCsrfToken } from 'next-auth/client';
 import { getCsrfToken } from 'next-auth/client';
-import Link from 'next/link';
 
 import Button from '@atoms/button';
 

@@ -15,7 +15,6 @@ const options = {
       },
       async authorize(credentials) {
         await dbConnect();
-        // console.log('cred', credentials);
         const user = await User.findOne({email: credentials.email, status: true}, (err, result) => {
           if (err){ 
             console.log(err);
@@ -25,7 +24,6 @@ const options = {
 
         if(user){
           if(await argon2.verify(user.password, credentials.password)) {
-            // console.log(user);
             return user;
           } else {
             console.log('error');

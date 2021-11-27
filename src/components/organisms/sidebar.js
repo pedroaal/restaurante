@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { BiCartAlt, BiBarcodeReader } from "react-icons/bi";
-import Link from 'next/link';
+// import Link from 'next/link';
 
 export default function Sidebar() {
   return (

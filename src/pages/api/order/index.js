@@ -19,20 +19,20 @@ export default async function (req, res) {
         return res.status(200).send(newModel);
       });
       break
-    case 'PUT':
-      // response = 'ok'
-      // response = await Order.findById(id);
-      // console.log(response);
-      res.status(200).json('response')
-      break
-    case 'DELETE':
-      // response = 'ok'
-      // response = await Order.findById(id);
-      // console.log(response);
-      res.status(200).json('response')
-      break
+    // case 'PUT':
+    //   response = 'ok'
+    //   response = await Order.findById(id);
+    //   console.log(response);
+    //   res.status(200).json('response')
+    //   break
+    // case 'DELETE':
+    //   response = 'ok'
+    //   response = await Order.findById(id);
+    //   console.log(response);
+    //   res.status(200).json('response')
+    //   break
     default:
-      res.setHeader('Allow', ['GET', 'POST', 'PUT', 'DELETE'])
+      res.setHeader('Allow', ['GET', 'POST'])
       res.status(405).end(`Method ${method} Not Allowed`)
   }
 }

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { BiCartAlt, BiBarcodeReader } from "react-icons/bi";
 import Link from 'next/link';
+
 import { FaShoppingCart, FaQrcode } from 'react-icons/fa';
 
 export default function Footer() {
