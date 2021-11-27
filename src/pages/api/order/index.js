@@ -8,9 +8,9 @@ export default async function (req, res) {
 
   switch (method) {
     case 'GET':
-      const response = await Order.find().all('finish', false);
-      console.log(response)
-      res.status(200).json(response)
+      Order.find({ finish: false })
+        .then(result => res.status(200).send(result))
+        .catch(err => res.status(400).send(err))
       break
     case 'POST':
       const newModel = new Order(req.body);

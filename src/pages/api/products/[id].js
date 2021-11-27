@@ -8,23 +8,25 @@ export default async function (req, res) {
 
   switch (method) {
     case 'GET':
-      const product = await Product.findById(id);
-      res.status(200).json(product)
+      Product.findById(id)
+        .then(result => res.status(200).json(result))
+        .catch(err => res.status(400).json(err))
       break
-    case 'POST':
-      // Update or create data in your database
-      res.status(200).json()
-      break
-    case 'PUT':
-      // Update or create data in your database
-      res.status(200).json()
-      break
-    case 'DELETE':
-      // Update or create data in your database
-      res.status(200).json()
-      break
+    // case 'POST':
+    //   // Update or create data in your database
+    //   res.status(200).json()
+    //   break
+    // case 'PUT':
+    //   // Update or create data in your database
+    //   res.status(200).json()
+    //   break
+    // case 'DELETE':
+    //   // Update or create data in your database
+    //   res.status(200).json()
+    //   break
     default:
-      res.setHeader('Allow', ['GET', 'POST', 'PUT', 'DELETE'])
+      res.setHeader('Allow', ['GET'])
+      // res.setHeader('Allow', ['GET', 'POST', 'PUT', 'DELETE'])
       res.status(405).end(`Method ${method} Not Allowed`)
   }
 }

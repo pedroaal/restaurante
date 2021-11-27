@@ -8,15 +8,15 @@
 
 //   switch (method) {
 //     case 'GET':
-//       const response = await Model.findById(id);
-//       res.status(200).json(response)
+//       Model.findById(id)
+//         .then(result => res.status(200).json(result))
+//         .catch(err => res.status(400).json(err))
 //       break
 //     case 'POST':
 //       const newModel = new Model(req.body);
-//       newModel.save(err => {
-//         if (err) return res.status(500).send(err);
-//         return res.status(200).send(newModel);
-//       });
+//       newModel.save()
+//         .then(result => res.status(200).json(result))
+//         .catch(err => res.status(400).json(err));
 //       break
 //     case 'PUT':
 //       // response = 'ok'

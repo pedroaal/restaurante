@@ -8,28 +8,26 @@ export default async function (req, res) {
 
   switch (method) {
     case 'GET':
-      const response = await Order.findById(id);
-      res.status(200).json(response)
+      Order.findById(id)
+        .then(result => res.status(200).json(result))
+        .catch(err => res.status(400).json(err))
       break
     // case 'POST':
     //   const newModel = new Order(req.body);
     //   console.log(newModel)
-    //   newModel.save(err => {
-    //     if (err) return res.status(500).send(err);
-    //     return res.status(200).send(newModel);
-    //   });
+    //   newModel.save()
+    //     .then(result => res.status(200).json(result))
+    //     .catch(err => res.status(400).json(err));
     //   break
     case 'PUT':
-      Order.findByIdAndUpdate(id, req.body, { new: true }, (err, order) => {
-        if (err) return res.status(500).json(err)
-        return res.status(200).json(order)
-      });
+      Order.findByIdAndUpdate(id, req.body, { new: true })
+        .then(result => res.status(200).json(result))
+        .catch(err => res.status(400).json(err))
       break
     case 'DELETE':
-      await Order.findByIdAndRemove(id, (err, order) => {
-        if (err) return res.status(500).json(err)
-        return res.status(200).json(order)
-      });
+      Order.findByIdAndRemove(id)
+        .then(result => res.status(200).json(result))
+        .catch(err => res.status(400).json(err))
       break
     default:
       res.setHeader('Allow', ['GET', 'PUT', 'DELETE'])
