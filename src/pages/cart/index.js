@@ -18,7 +18,7 @@ function Cart() {
 
   const ordenar = async () => {
     if (cart.length <= 0) {
-      toast.error('Primero agraga un producto al carrito');
+      toast.error('Primero agrega un producto al carrito');
       return
     }
 

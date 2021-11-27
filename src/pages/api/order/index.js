@@ -9,6 +9,7 @@ export default async function (req, res) {
   switch (method) {
     case 'GET':
       const response = await Order.find().all('finish', false);
+      console.log(response)
       res.status(200).json(response)
       break
     case 'POST':
