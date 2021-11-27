@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Layout from "@layouts/layout";
 import Order from "@molecules/order";
 
-function Orders({ orders }) {
+function Orders() {
   const [session] = useSession();
   const router = useRouter()
 
