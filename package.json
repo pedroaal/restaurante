@@ -14,6 +14,7 @@
     "next": "10.2.0",
     "next-auth": "^3.22.0",
     "next-connect": "^0.10.1",
+    "next-pwa": "^5.4.1",
     "next-redux-wrapper": "^7.0.5",
     "postcss-easy-import": "^3.0.0",
     "react": "17.0.2",
