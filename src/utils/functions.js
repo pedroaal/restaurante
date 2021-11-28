@@ -1,0 +1,1 @@
+export const getMins = mins => 1000 * 60 * mins

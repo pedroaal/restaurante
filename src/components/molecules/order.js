@@ -1,14 +1,12 @@
 // import Link from 'next/link';
 import { baseAPI } from '@/config/api';
-import { useRouter } from 'next/router';
 
 import { toast } from 'react-toastify';
 
 import Button from '@atoms/button';
 
-function Order({ order, order_id }) {
+function Order({ order, order_id, getOrders }) {
   const cart = order.cart
-  const router = useRouter()
 
   const terminar = async () => {
     const response = await toast.promise(
@@ -26,7 +24,7 @@ function Order({ order, order_id }) {
         .then(res => res.json())
         .then(data => {
           console.log(data)
-          router.reload()
+          getOrders()
         })
         .catch(err => console.log(err)),
       {
