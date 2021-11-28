@@ -1,42 +1,40 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { baseAPI } from '@config/api';
 import { getMins } from "@/utils/functions";
 import { useSession } from "next-auth/client";
 
-import { setOrders } from '@/redux/actions/orders'
-import { useSelector, useDispatch } from "react-redux";
-
 import Layout from "@layouts/layout";
 import Order from "@molecules/order";
 
-function Orders() {
+const Orders = () => {
   const [session] = useSession();
 
-  const dispatch = useDispatch()
-  const orders = useSelector(state => state.orderReducer.orders)
+  useEffect(() => {
+    getOrders()
+    return () => {
+      clearAllTimers()
+    }
+  }, [])
 
-  const [loading, setLoading] = useState(orders.length ? false : true);
-  const [empty, setEmpty] = useState(false);
+  var timers = [];
+
+  function clearAllTimers() {
+    while (timers.length) {
+      clearTimeout(timers.pop());
+    }
+    return
+  }
 
   const getOrders = () => {
-    console.log('getting...')
     fetch(`${baseAPI}order`)
       .then(res => res.json())
       .then(data => {
-        if (data.length <= 0) {
-          setEmpty(true)
-        }
-        dispatch(setOrders(data))
-        setLoading(false);
-        setTimeout(() => {
-          setEmpty(false)
+        clearAllTimers()
+        const t = setTimeout(() => {
           getOrders()
-        }, getMins(2));
+        }, getMins(2))
+        timers.push(t);
       })
-  }
-
-  if (orders.length <= 0 && !empty) {
-    getOrders()
   }
 
   return (
