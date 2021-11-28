@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { FaShoppingCart, FaQrcode } from 'react-icons/fa';
 
-export default function Footer() {
+const Footer = () => {
   return (
     <>
       <div className='flex items-center'>
@@ -20,3 +20,5 @@ export default function Footer() {
     </>
   )
 }
+
+export default Footer

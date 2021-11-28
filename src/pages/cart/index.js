@@ -11,7 +11,7 @@ import ContentLayout from '@layouts/contentLayout';
 
 toast.configure()
 
-function Cart() {
+const Cart = () => {
   const order = useSelector(state => state.cartReducer)
   const cart = useSelector(state => state.cartReducer.cart)
   const coupon = useSelector(state => state.cartReducer.coupon)

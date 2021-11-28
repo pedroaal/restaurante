@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function Producto({ producto }) {
+const Producto = ({ producto }) => {
   return (
     <Link href='/menu/[slug]' as={`/menu/${producto._id}`}>
       <div className="w-full rounded overflow-hidden shadow-lg">
@@ -22,3 +22,5 @@ export default function Producto({ producto }) {
     </Link>
   )
 }
+
+export default Producto

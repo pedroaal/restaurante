@@ -42,7 +42,7 @@ export async function getStaticProps() {
   }
 }
 
-function Menu({ categories, products }) {
+const Menu = ({ categories, products }) => {
   const [session] = useSession();
   const dispatch = useDispatch()
 

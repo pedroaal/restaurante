@@ -45,7 +45,7 @@ export async function getStaticProps({ params }) {
 
 toast.configure()
 
-function ProductDetail({ product }) {
+const ProductDetail = ({ product }) => {
   const [session] = useSession();
   const dispatch = useDispatch()
   const router = useRouter()

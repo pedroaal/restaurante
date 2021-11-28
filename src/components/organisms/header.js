@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { FaSearch, FaBars } from 'react-icons/fa';
 
-export default function Nav() {
+const Nav = () => {
   return (
     <nav>
       <div className='flex justify-center items-center bg-gray-300 w-full p-4'>
@@ -21,3 +21,5 @@ export default function Nav() {
     </nav>
   )
 }
+
+export default Nav

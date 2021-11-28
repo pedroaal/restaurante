@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 import Button from '@atoms/button';
 
-function Order({ order, order_id, getOrders }) {
+const Order = ({ order, order_id, getOrders }) => {
   const cart = order.cart
 
   const terminar = async () => {

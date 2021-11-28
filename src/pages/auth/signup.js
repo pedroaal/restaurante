@@ -17,7 +17,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default function Signin({ csrfToken }) {
+const Signin = ({ csrfToken }) => {
   const initialState = {
     firstName: '',
     lastName: '',
@@ -103,3 +103,5 @@ export default function Signin({ csrfToken }) {
     </div>
   )
 }
+
+export default Signin

@@ -6,7 +6,7 @@ import { signIn, signOut, useSession } from 'next-auth/client';
 import QR from '@molecules/qr';
 import Button from '@atoms/button';
 
-export default function Home() {
+const Home = () => {
 
   const [session, loading] = useSession();
 
@@ -45,3 +45,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default Home

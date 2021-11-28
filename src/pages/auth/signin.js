@@ -13,7 +13,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default function Signin({ csrfToken }) {
+const Signin = ({ csrfToken }) => {
   return (
     <div className='screen-centered'>
       <Head>
@@ -47,3 +47,5 @@ export default function Signin({ csrfToken }) {
     </div>
   )
 }
+
+export default Signin

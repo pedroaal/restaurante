@@ -5,7 +5,7 @@ import Footer from '@organisms/footer';
 import Categories from '@organisms/categories';
 import Sidebar from '@organisms/sidebar';
 
-function Layout({ children, title, categories = false }) {
+const Layout = ({ children, title, categories = false }) => {
   return (
     <div className='min-w-full'>
       <Head>

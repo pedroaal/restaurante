@@ -1,6 +1,6 @@
 // import Link from 'next/link';
 
-export default function Sidebar() {
+const Sidebar = () => {
   return (
     <div className='w-1/6 sm:w-auto hidden md:flex'>
       <div className='self-end md:self-center flex flex-row items-right h-full p-4 sm:p-2'>
@@ -14,3 +14,5 @@ export default function Sidebar() {
     </div>
   )
 }
+
+export default Sidebar

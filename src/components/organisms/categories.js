@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { FaUndo } from 'react-icons/fa';
 
-function Categories() {
+const Categories = () => {
   const dispatch = useDispatch()
   const categories = useSelector(state => state.productReducer.categories)
   const products = useSelector(state => state.productReducer.products_all)
