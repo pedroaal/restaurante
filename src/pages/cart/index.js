@@ -22,6 +22,11 @@ const Cart = () => {
       return
     }
 
+    if (order.store_id == 0 || order.table == 0) {
+      toast.error('Primero escanea el QR');
+      return
+    }
+
     const response = await toast.promise(
       fetch(`${baseAPI}order`, {
         method: "POST",

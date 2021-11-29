@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@blackbox-vision/react-qr-reader": "^5.0.0",
     "argon2": "^0.27.2",
     "cssnano": "^4.1.11",
     "mongoose": "^5.12.9",

@@ -1,10 +1,10 @@
-import { ADD_CART } from '@/redux/types'
+import { ADD_CART, SET_LOCAL } from '@/redux/types'
 import { toast } from 'react-toastify';
 
 toast.configure()
 
 const INITIAL_STATE = {
-  store_id: '60f65544480e19e273dab114',
+  store_id: 0,
   table: 0,
   coupon: 0,
   total: 0,
@@ -29,6 +29,9 @@ const cartReducer = (state = INITIAL_STATE, action) => {
 
       return { ...state, total, cart };
       break;
+    case SET_LOCAL:
+      return { ...state, store_id: action.payload.store_id, table: action.payload.table }
+      break
     default:
       return state;
       break;

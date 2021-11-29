@@ -1,30 +1,38 @@
+import { QrReader } from '@blackbox-vision/react-qr-reader';
+
 import { useSelector, useDispatch } from "react-redux";
+import { setLocal } from '@/redux/actions/cart';
+
+import { toast } from "react-toastify";
+
+toast.configure()
 
 const QR = () => {
+  const dispatch = useDispatch()
   const store_id = useSelector(state => state.cartReducer.store_id)
   const table = useSelector(state => state.cartReducer.table)
 
-  // captureImage() {
-  //   const context = this.canvas.getContext("2d")
-  //   context.drawImage(this.videoStream, 0, 0, 800, 600)
-  //   const image = this.canvas.toDataURL('image/jpeg', 0.5)
-  //   return image
-  // }
+  const onFind = (result, error) => {
+    if (!!result) {
+      const data = JSON.parse(result?.text)
+      dispatch(setLocal(data));
+    }
+    if (!!error) {
+      console.info(error);
+    }
+  }
 
   return (
     <div>
-      {/* <video
-        ref={(stream) => { this.videoStream = stream }}
-        width='800'
-        height='600'
-        style={{ display: 'none' }}>
-      </video>
-      <canvas
-        ref={(canvas) => { this.canvas = canvas }}
-        width='800'
-        height='600'
-        style={{ display: 'none' }}>
-      </canvas> */}
+      {
+        store_id == 0 || table == 0 ?
+          <QrReader
+            onResult={(result, error) => onFind(result, error)}
+            style={{ width: '100%' }}
+          /> :
+          'Continuar'
+      }
+      <p>result: {store_id}</p>
     </div >
   )
 }
