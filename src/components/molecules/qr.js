@@ -23,16 +23,17 @@ const QR = () => {
   }
 
   return (
-    <div>
+    <div className='min-w-full w-screen p-4 h-auto'>
       {
         store_id == 0 || table == 0 ?
           <QrReader
             onResult={(result, error) => onFind(result, error)}
-            style={{ width: '100%' }}
+            className='h-full w-full'
+            videoContainerStyle={{ width: '100%', height: '100%' }}
           /> :
           'Continuar'
       }
-      <p>result: {store_id}</p>
+      {/* <p>result: {store_id}</p> */}
     </div >
   )
 }
